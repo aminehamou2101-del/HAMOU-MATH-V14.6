@@ -1,801 +1,354 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ar" dir="rtl">
 <head>
-<meta charset="UTF-8">
+<meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-
-<title>HAMOU MATH — Global Mathematics Platform</title>
+<title>HAMOU MATH — Global Mathematics Library</title>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
-:root{
---bg:#f4f7fb;
---card:#fff;
---text:#172033;
---muted:#667085;
---primary:#2563eb;
---green:#22c55e;
---dark:#101828;
---border:#e4e7ec;
---gold:#f59e0b;
---danger:#ef4444;
---shadow:0 10px 35px rgba(16,24,40,.08)
-}
-
-*{
-box-sizing:border-box;
-margin:0;
-padding:0
-}
-
-html{
-scroll-behavior:smooth
-}
-
+*{box-sizing:border-box}
 body{
-font-family:Arial,Tahoma,sans-serif;
-background:var(--bg);
-color:var(--text);
-line-height:1.7
+ margin:0;
+ font-family:Arial,Tahoma,sans-serif;
+ background:#07111f;
+ color:#f5f7fb;
 }
-
-button,input,select{
-font:inherit
-}
-
-button{
-cursor:pointer
-}
-
-/* HEADER */
+a{text-decoration:none;color:inherit}
+button,input,select{font:inherit}
 
 header{
-position:sticky;
-top:0;
-z-index:999;
-background:#101828f7;
-backdrop-filter:blur(15px);
-color:#fff;
-box-shadow:0 5px 25px #0002
+ position:sticky;
+ top:0;
+ z-index:100;
+ background:rgba(7,17,31,.94);
+ backdrop-filter:blur(15px);
+ border-bottom:1px solid #1d3048;
 }
 
 .nav{
-max-width:1500px;
-margin:auto;
-min-height:72px;
-display:flex;
-align-items:center;
-justify-content:space-between;
-gap:15px;
-padding:10px 20px
+ max-width:1250px;
+ margin:auto;
+ padding:15px 20px;
+ display:flex;
+ align-items:center;
+ justify-content:space-between;
+ gap:20px;
 }
 
 .logo{
-font-size:27px;
-font-weight:900;
-white-space:nowrap
+ font-size:24px;
+ font-weight:900;
+ color:#5eead4;
 }
 
 .logo span{
-color:#4ade80
+ color:white;
 }
 
-.navlinks{
-display:flex;
-gap:5px;
-flex-wrap:wrap;
-justify-content:center
+nav{
+ display:flex;
+ gap:8px;
+ flex-wrap:wrap;
 }
 
-.navlinks button{
-border:0;
-background:transparent;
-color:#d0d5dd;
-padding:8px 11px;
-border-radius:9px
+nav a{
+ padding:9px 12px;
+ border-radius:10px;
+ color:#cbd5e1;
 }
 
-.navlinks button:hover{
-background:#ffffff15;
-color:#fff
+nav a:hover{
+ background:#12243a;
+ color:#5eead4;
 }
-
-.languages{
-display:flex;
-gap:5px
-}
-
-.languages button{
-background:#ffffff12;
-border:1px solid #ffffff20;
-color:#fff;
-padding:6px 9px;
-border-radius:8px
-}
-
-.languages button.active{
-background:#4ade80;
-color:#052e16
-}
-
-/* HERO */
 
 .hero{
-background:
-radial-gradient(circle at 15% 25%,#22c55e35,transparent 28%),
-radial-gradient(circle at 85% 30%,#2563eb40,transparent 30%),
-linear-gradient(135deg,#0b1220,#172554);
-color:#fff;
-padding:85px 20px
+ max-width:1250px;
+ margin:auto;
+ padding:70px 20px 45px;
+ display:grid;
+ grid-template-columns:1.5fr 1fr;
+ gap:35px;
+ align-items:center;
 }
 
-.hero-inner{
-max-width:1200px;
-margin:auto;
-text-align:center
+.badge{
+ display:inline-block;
+ background:#102b3c;
+ border:1px solid #1d5360;
+ color:#5eead4;
+ padding:8px 13px;
+ border-radius:30px;
+ font-weight:bold;
 }
 
-.hero-badge{
-display:inline-block;
-padding:8px 18px;
-border:1px solid #ffffff25;
-background:#ffffff12;
-border-radius:50px;
-margin-bottom:20px
-}
-
-.hero h1{
-font-size:clamp(35px,6vw,70px);
-line-height:1.1;
-margin-bottom:20px
-}
-
-.hero h1 span{
-color:#4ade80
+h1{
+ font-size:clamp(40px,6vw,72px);
+ line-height:1;
+ margin:20px 0;
 }
 
 .hero p{
-max-width:850px;
-margin:auto;
-color:#d0d5dd;
-font-size:19px
+ font-size:20px;
+ line-height:1.8;
+ color:#aebdce;
 }
 
-.hero-buttons{
-margin-top:30px;
-display:flex;
-gap:12px;
-justify-content:center;
-flex-wrap:wrap
+.hero-card{
+ padding:30px;
+ border-radius:25px;
+ background:linear-gradient(145deg,#10253d,#0b1729);
+ border:1px solid #203852;
+ box-shadow:0 20px 60px #0005;
 }
 
-/* BUTTONS */
-
-.btn{
-border:0;
-padding:12px 21px;
-border-radius:12px;
-font-weight:bold;
-transition:.2s
+.big-number{
+ font-size:55px;
+ font-weight:900;
+ color:#5eead4;
 }
-
-.btn:hover{
-transform:translateY(-2px)
-}
-
-.primary{
-background:#4ade80;
-color:#052e16
-}
-
-.blue{
-background:#2563eb;
-color:#fff
-}
-
-.dark{
-background:#172033;
-color:#fff
-}
-
-.white{
-background:#fff;
-color:#172033
-}
-
-.outline{
-background:transparent;
-border:1px solid var(--border);
-color:var(--text)
-}
-
-/* CONTAINER */
-
-.container{
-max-width:1500px;
-margin:auto;
-padding:35px 20px
-}
-
-/* STATS */
 
 .stats{
-display:grid;
-grid-template-columns:repeat(6,1fr);
-gap:14px;
-margin-top:-38px;
-position:relative
+ max-width:1250px;
+ margin:auto;
+ padding:15px 20px 35px;
+ display:grid;
+ grid-template-columns:repeat(4,1fr);
+ gap:15px;
 }
 
 .stat{
-background:#fff;
-border-radius:18px;
-padding:20px 10px;
-text-align:center;
-box-shadow:var(--shadow)
-}
-
-.stat-icon{
-font-size:25px
+ background:#0d1b2d;
+ border:1px solid #1d3048;
+ border-radius:18px;
+ padding:20px;
+ text-align:center;
 }
 
 .stat strong{
-display:block;
-font-size:27px;
-color:var(--primary)
+ display:block;
+ font-size:28px;
+ color:#5eead4;
 }
 
-.stat small{
-color:var(--muted)
-}
-
-/* SECTIONS */
-
-section{
-scroll-margin-top:90px
+.section{
+ max-width:1250px;
+ margin:auto;
+ padding:35px 20px;
 }
 
 .section-title{
-display:flex;
-justify-content:space-between;
-align-items:center;
-gap:15px;
-margin:42px 0 18px
+ display:flex;
+ justify-content:space-between;
+ align-items:end;
+ gap:15px;
+ margin-bottom:20px;
 }
 
 .section-title h2{
-font-size:30px
-}
-
-.section-title p{
-color:var(--muted)
-}
-
-/* QUICK CATEGORIES */
-
-.categories{
-display:grid;
-grid-template-columns:repeat(8,1fr);
-gap:12px
-}
-
-.category{
-background:#fff;
-border:1px solid var(--border);
-border-radius:16px;
-padding:18px 8px;
-text-align:center;
-transition:.2s
-}
-
-.category:hover{
-transform:translateY(-4px);
-box-shadow:var(--shadow)
-}
-
-.category div{
-font-size:30px
-}
-
-.category strong{
-display:block;
-margin-top:5px
-}
-
-.category small{
-color:var(--muted)
-}
-
-/* LIBRARY */
-
-.library{
-background:#fff;
-border-radius:25px;
-padding:22px;
-box-shadow:var(--shadow)
-}
-
-.searchbar{
-display:flex;
-gap:10px;
-margin-bottom:15px
-}
-
-.searchbar input{
-flex:1;
-border:1px solid var(--border);
-border-radius:13px;
-padding:14px 16px;
-outline:none
-}
-
-.searchbar input:focus{
-border-color:var(--primary)
+ margin:0;
+ font-size:32px;
 }
 
 .filters{
-display:grid;
-grid-template-columns:repeat(6,1fr);
-gap:10px
+ display:grid;
+ grid-template-columns:2fr repeat(5,1fr);
+ gap:10px;
+ margin-bottom:20px;
 }
 
-.filters select{
-width:100%;
-padding:11px;
-border:1px solid var(--border);
-border-radius:10px;
-background:#fff
+input,select{
+ width:100%;
+ padding:14px;
+ border-radius:12px;
+ border:1px solid #263b54;
+ background:#0b192b;
+ color:white;
+ outline:none;
 }
 
-.library-toolbar{
-display:flex;
-justify-content:space-between;
-align-items:center;
-gap:10px;
-margin:18px 0
+input:focus,select:focus{
+ border-color:#5eead4;
 }
 
-.result-count{
-font-weight:bold
+.resources{
+ display:grid;
+ grid-template-columns:repeat(3,1fr);
+ gap:18px;
 }
 
-/* RESOURCES */
-
-.resource-grid{
-display:grid;
-grid-template-columns:repeat(4,1fr);
-gap:17px
+.card{
+ background:#0d1b2d;
+ border:1px solid #20344d;
+ border-radius:20px;
+ padding:20px;
+ display:flex;
+ flex-direction:column;
+ min-height:290px;
+ transition:.2s;
 }
 
-.resource{
-border:1px solid var(--border);
-border-radius:18px;
-padding:17px;
-display:flex;
-flex-direction:column;
-min-height:300px;
-background:#fff;
-transition:.2s
+.card:hover{
+ transform:translateY(-4px);
+ border-color:#37617f;
 }
 
-.resource:hover{
-transform:translateY(-4px);
-box-shadow:var(--shadow)
+.card-top{
+ display:flex;
+ justify-content:space-between;
+ gap:10px;
 }
 
-.resource-head{
-display:flex;
-justify-content:space-between;
-gap:5px;
-margin-bottom:10px
+.provider{
+ font-size:12px;
+ color:#5eead4;
+ font-weight:bold;
+}
+
+.type{
+ background:#15283e;
+ color:#cbd5e1;
+ padding:5px 8px;
+ border-radius:8px;
+ font-size:12px;
+}
+
+.card h3{
+ font-size:21px;
+ margin:18px 0 10px;
+}
+
+.card p{
+ color:#aebdce;
+ line-height:1.6;
+ flex:1;
+}
+
+.tags{
+ display:flex;
+ gap:5px;
+ flex-wrap:wrap;
+ margin:10px 0;
 }
 
 .tag{
-font-size:12px;
-padding:4px 8px;
-border-radius:8px;
-background:#eef2ff;
-color:#3730a3
-}
-
-.premium{
-background:#fff7d6;
-color:#8a5b00
-}
-
-.resource h3{
-font-size:18px;
-margin-bottom:7px
-}
-
-.resource-description{
-font-size:14px;
-color:var(--muted);
-flex:1
+ background:#11283a;
+ color:#9dded5;
+ padding:5px 8px;
+ border-radius:8px;
+ font-size:11px;
 }
 
 .meta{
-display:flex;
-flex-wrap:wrap;
-gap:5px;
-margin:12px 0
+ color:#8194aa;
+ font-size:12px;
+ margin-bottom:14px;
 }
 
-.meta span{
-font-size:11px;
-background:#f2f4f7;
-padding:4px 7px;
-border-radius:7px
+.actions{
+ display:flex;
+ gap:8px;
 }
 
-.resource-footer{
-display:flex;
-gap:7px
+.btn{
+ border:0;
+ cursor:pointer;
+ padding:12px 15px;
+ border-radius:11px;
+ font-weight:bold;
 }
 
-.resource-footer button{
-flex:1;
-border:0;
-padding:9px;
-border-radius:9px
+.primary{
+ background:#5eead4;
+ color:#06131f;
 }
 
-/* PAGINATION */
-
-.pagination{
-display:flex;
-justify-content:center;
-align-items:center;
-gap:8px;
-margin-top:25px;
-flex-wrap:wrap
-}
-
-.pagination button{
-border:1px solid var(--border);
-background:#fff;
-padding:9px 15px;
-border-radius:9px
-}
-
-.pagination button.active{
-background:var(--primary);
-color:#fff
+.secondary{
+ background:#172a40;
+ color:white;
 }
 
 .empty{
-padding:60px 20px;
-text-align:center;
-color:var(--muted)
+ padding:50px;
+ text-align:center;
+ background:#0d1b2d;
+ border-radius:20px;
+ color:#9fb0c3;
 }
 
-/* DASHBOARD */
-
-.dashboard{
-display:grid;
-grid-template-columns:2fr 1fr;
-gap:17px
+.pagination{
+ display:flex;
+ justify-content:center;
+ align-items:center;
+ gap:10px;
+ margin:25px 0;
 }
 
-.panel{
-background:#fff;
-border-radius:22px;
-padding:22px;
-box-shadow:var(--shadow)
+.page{
+ background:#12243a;
+ border:1px solid #29415b;
+ color:white;
+ padding:10px 16px;
+ border-radius:10px;
+ cursor:pointer;
 }
 
-.xpbar{
-height:12px;
-background:#eaecf0;
-border-radius:20px;
-overflow:hidden;
-margin:12px 0
-}
-
-.xpfill{
-height:100%;
-width:0;
-background:#22c55e
-}
-
-.badges{
-display:grid;
-grid-template-columns:repeat(4,1fr);
-gap:10px
-}
-
-.badge-card{
-background:#f8fafc;
-border-radius:14px;
-padding:15px;
-text-align:center
-}
-
-.badge-card div{
-font-size:30px
-}
-
-/* GAMES */
-
-.games{
-display:grid;
-grid-template-columns:repeat(5,1fr);
-gap:15px
+.game-grid{
+ display:grid;
+ grid-template-columns:repeat(4,1fr);
+ gap:15px;
 }
 
 .game{
-background:#fff;
-border-radius:18px;
-padding:22px 15px;
-text-align:center;
-box-shadow:var(--shadow);
-transition:.2s
+ padding:25px;
+ border-radius:20px;
+ background:#0d1b2d;
+ border:1px solid #20344d;
+ text-align:center;
 }
-
-.game:hover{
-transform:translateY(-4px)
-}
-
-.game-icon{
-font-size:45px
-}
-
-.game button{
-margin-top:12px;
-width:100%
-}
-
-/* GLOBAL */
-
-.global{
-background:
-linear-gradient(135deg,#101828,#172554);
-color:#fff;
-border-radius:28px;
-padding:40px 25px;
-margin-top:40px
-}
-
-.global-grid{
-display:grid;
-grid-template-columns:repeat(4,1fr);
-gap:15px;
-margin-top:25px
-}
-
-.global-card{
-background:#ffffff10;
-border:1px solid #ffffff15;
-padding:20px;
-border-radius:17px
-}
-
-.global-card strong{
-font-size:25px;
-display:block
-}
-
-/* PREMIUM */
-
-.premium-box{
-background:linear-gradient(135deg,#fff7d6,#fff);
-border:1px solid #f5d76e;
-border-radius:25px;
-padding:30px;
-display:grid;
-grid-template-columns:2fr 1fr;
-gap:20px;
-align-items:center
-}
-
-.premium-list{
-display:grid;
-grid-template-columns:repeat(2,1fr);
-gap:10px;
-margin-top:15px
-}
-
-/* FOOTER */
 
 footer{
-background:#101828;
-color:#b8c0ce;
-padding:50px 20px;
-margin-top:50px
+ margin-top:50px;
+ padding:40px 20px;
+ text-align:center;
+ border-top:1px solid #1d3048;
+ color:#8294a9;
 }
 
-.footer-grid{
-max-width:1300px;
-margin:auto;
-display:grid;
-grid-template-columns:2fr 1fr 1fr 1fr;
-gap:30px
+#toast{
+ position:fixed;
+ bottom:20px;
+ left:50%;
+ transform:translateX(-50%);
+ background:#14263b;
+ border:1px solid #34506d;
+ padding:14px 20px;
+ border-radius:12px;
+ display:none;
+ z-index:500;
 }
 
-footer h3{
-color:#fff;
-margin-bottom:10px
+@media(max-width:900px){
+ .hero{grid-template-columns:1fr}
+ .stats{grid-template-columns:repeat(2,1fr)}
+ .filters{grid-template-columns:1fr 1fr}
+ .resources{grid-template-columns:1fr 1fr}
+ .game-grid{grid-template-columns:1fr 1fr}
+ nav{display:none}
 }
 
-footer p{
-font-size:14px
-}
-
-.copyright{
-border-top:1px solid #ffffff15;
-margin-top:30px;
-padding-top:20px;
-text-align:center
-}
-
-/* MODAL */
-
-.modal{
-position:fixed;
-inset:0;
-background:#0009;
-display:none;
-align-items:center;
-justify-content:center;
-padding:20px;
-z-index:5000
-}
-
-.modal.show{
-display:flex
-}
-
-.modal-box{
-background:#fff;
-width:min(480px,100%);
-border-radius:22px;
-padding:25px
-}
-
-.modal-close{
-float:left;
-border:0;
-background:none;
-font-size:25px
-}
-
-.modal-box input{
-width:100%;
-padding:12px;
-border:1px solid var(--border);
-border-radius:10px;
-margin:7px 0
-}
-
-.modal-box button.main{
-width:100%;
-margin-top:10px
-}
-
-/* TOAST */
-
-.toast{
-position:fixed;
-bottom:20px;
-left:20px;
-right:20px;
-max-width:500px;
-margin:auto;
-background:#101828;
-color:#fff;
-padding:14px 18px;
-border-radius:12px;
-display:none;
-z-index:7000;
-text-align:center
-}
-
-/* MOBILE */
-
-@media(max-width:1200px){
-
-.categories{
-grid-template-columns:repeat(4,1fr)
-}
-
-.resource-grid{
-grid-template-columns:repeat(3,1fr)
-}
-
-.stats{
-grid-template-columns:repeat(3,1fr)
-}
-
-.filters{
-grid-template-columns:repeat(3,1fr)
-}
-
-.games{
-grid-template-columns:repeat(3,1fr)
-}
-
-}
-
-@media(max-width:750px){
-
-.nav{
-flex-direction:column
-}
-
-.navlinks{
-width:100%
-}
-
-.hero{
-padding:60px 15px
-}
-
-.container{
-padding:25px 12px
-}
-
-.stats{
-grid-template-columns:repeat(2,1fr);
-margin-top:-25px
-}
-
-.categories{
-grid-template-columns:repeat(2,1fr)
-}
-
-.filters{
-grid-template-columns:repeat(2,1fr)
-}
-
-.resource-grid{
-grid-template-columns:1fr
-}
-
-.games{
-grid-template-columns:repeat(2,1fr)
-}
-
-.dashboard{
-grid-template-columns:1fr
-}
-
-.global-grid{
-grid-template-columns:repeat(2,1fr)
-}
-
-.premium-box{
-grid-template-columns:1fr
-}
-
-.footer-grid{
-grid-template-columns:1fr 1fr
-}
-
-.searchbar{
-flex-direction:column
-}
-
-}
-
-@media(max-width:450px){
-
-.filters{
-grid-template-columns:1fr
-}
-
-.games{
-grid-template-columns:1fr
-}
-
-.footer-grid{
-grid-template-columns:1fr
-}
-
-.premium-list{
-grid-template-columns:1fr
-}
-
+@media(max-width:600px){
+ .stats,
+ .resources,
+ .game-grid,
+ .filters{
+  grid-template-columns:1fr;
+ }
+ .hero{padding-top:45px}
+ h1{font-size:43px}
+ .big-number{font-size:42px}
 }
 </style>
 </head>
@@ -803,572 +356,219 @@ grid-template-columns:1fr
 <body>
 
 <header>
-
 <div class="nav">
 
 <div class="logo">
 HAMOU <span>MATH</span>
 </div>
 
-<nav class="navlinks">
-
-<button onclick="go('home')">🏠 <span data-i18n="home">الرئيسية</span></button>
-
-<button onclick="go('library')">📚 <span data-i18n="library">المكتبة</span></button>
-
-<button onclick="go('games')">🎮 <span data-i18n="games">الألعاب</span></button>
-
-<button onclick="go('dashboard')">👤 <span data-i18n="account">حسابي</span></button>
-
-<button onclick="go('premium')">⭐ Premium</button>
-
+<nav>
+<a href="#home">الرئيسية</a>
+<a href="#library">المكتبة</a>
+<a href="#games">الألعاب</a>
+<a href="#global">العالمية</a>
 </nav>
 
-<div class="languages">
-
-<button id="ar" onclick="setLanguage('ar')">AR</button>
-<button id="fr" onclick="setLanguage('fr')">FR</button>
-<button id="en" onclick="setLanguage('en')">EN</button>
-
+<div>
+<select id="lang" onchange="changeLanguage(this.value)">
+<option value="ar">العربية</option>
+<option value="fr">Français</option>
+<option value="en">English</option>
+</select>
 </div>
 
 </div>
-
 </header>
 
-<!-- HERO -->
+<main>
 
 <section class="hero" id="home">
 
-<div class="hero-inner">
+<div>
+<span class="badge">🌍 Global Mathematics Education</span>
 
-<div class="hero-badge">
-🌍 HAMOU MATH GLOBAL
-</div>
-
-<h1>
-<span>HAMOU MATH</span><br>
-<span data-i18n="heroTitle">الجيل الجديد من تعليم الرياضيات</span>
+<h1 id="heroTitle">
+مكتبة الرياضيات العالمية
 </h1>
 
-<p data-i18n="heroText">
-منصة عالمية للتعلم، التمرين، الاختبارات، البكالوريا، البحث العلمي والتحديات الرياضية.
+<p id="heroText">
+اكتشف موارد رياضيات حقيقية من جامعات ومؤسسات تعليمية موثوقة حول العالم.
+دروس، كتب، تمارين، اختبارات ومقررات جامعية.
 </p>
 
-<div class="hero-buttons">
+<a href="#library" class="btn primary">
+📚 استكشف المكتبة
+</a>
+</div>
 
-<button class="btn primary" onclick="go('library')">
-📚 <span data-i18n="explore">استكشف المكتبة</span>
-</button>
+<div class="hero-card">
 
-<button class="btn white" onclick="openLogin()">
-👤 <span data-i18n="login">تسجيل الدخول</span>
-</button>
+<div>الموارد الموجودة الآن</div>
 
+<div class="big-number" id="totalResources">
+...
+</div>
+
+<div>
+موارد حقيقية مرتبطة بالمصادر الأصلية
+</div>
+
+<br>
+
+<div>
+OpenStax • MIT OpenCourseWare
 </div>
 
 </div>
 
 </section>
-
-<main class="container">
-
-<!-- STATS -->
 
 <section class="stats">
 
 <div class="stat">
-<div class="stat-icon">📚</div>
-<strong id="resourceCount">0</strong>
-<small data-i18n="resources">مورد</small>
+<strong id="statTotal">0</strong>
+<span>الموارد</span>
 </div>
 
 <div class="stat">
-<div class="stat-icon">🌍</div>
-<strong>200+</strong>
-<small data-i18n="countries">دولة مستهدفة</small>
-</div>
-
-<div class="stat">
-<div class="stat-icon">🌐</div>
 <strong>3</strong>
-<small data-i18n="languages">لغات</small>
+<span>لغات</span>
 </div>
 
 <div class="stat">
-<div class="stat-icon">🎓</div>
-<strong>5</strong>
-<small data-i18n="levels">مستويات</small>
+<strong>🌍</strong>
+<span>عالمي</span>
 </div>
 
 <div class="stat">
-<div class="stat-icon">🎮</div>
-<strong>10+</strong>
-<small data-i18n="games">ألعاب</small>
-</div>
-
-<div class="stat">
-<div class="stat-icon">⚡</div>
-<strong id="xpStat">0</strong>
-<small>XP</small>
+<strong>∞</strong>
+<span>قابل للتوسع</span>
 </div>
 
 </section>
 
-<!-- CATEGORIES -->
-
-<section>
+<section class="section" id="library">
 
 <div class="section-title">
-
 <div>
-<h2>🧭 <span data-i18n="categories">استكشف المجالات</span></h2>
-<p data-i18n="categoriesText">اختر المجال الذي تريد دراسته</p>
-</div>
-
-</div>
-
-<div class="categories">
-
-<div class="category" onclick="quickFilter('algebra')">
-<div>🔢</div>
-<strong>Algebra</strong>
-<small>الجبر</small>
-</div>
-
-<div class="category" onclick="quickFilter('analysis')">
-<div>📈</div>
-<strong>Analysis</strong>
-<small>التحليل</small>
-</div>
-
-<div class="category" onclick="quickFilter('geometry')">
-<div>📐</div>
-<strong>Geometry</strong>
-<small>الهندسة</small>
-</div>
-
-<div class="category" onclick="quickFilter('probability')">
-<div>🎲</div>
-<strong>Probability</strong>
-<small>الاحتمالات</small>
-</div>
-
-<div class="category" onclick="quickFilter('statistics')">
-<div>📊</div>
-<strong>Statistics</strong>
-<small>الإحصاء</small>
-</div>
-
-<div class="category" onclick="quickFilter('mathematics')">
-<div>🧮</div>
-<strong>Mathematics</strong>
-<small>رياضيات</small>
-</div>
-
-<div class="category" onclick="quickType('bac')">
-<div>🎓</div>
-<strong>BAC</strong>
-<small>بكالوريا</small>
-</div>
-
-<div class="category" onclick="quickType('competition')">
-<div>🏆</div>
-<strong>Olympiad</strong>
-<small>مسابقات</small>
-</div>
-
-</div>
-
-</section>
-
-<!-- LIBRARY -->
-
-<section id="library">
-
-<div class="section-title">
-
-<div>
-<h2>📚 <span data-i18n="libraryTitle">المكتبة العالمية</span></h2>
-<p data-i18n="libraryText">
-ابحث في مكتبة ضخمة قابلة للتوسع إلى ملايين الموارد.
+<h2>📚 المكتبة العالمية</h2>
+<p style="color:#8294a9">
+موارد حقيقية — افتح المصدر الأصلي مباشرة
 </p>
 </div>
-
-</div>
-
-<div class="library">
-
-<div class="searchbar">
-
-<input
-id="searchInput"
-placeholder="ابحث عن درس، تمرين، بكالوريا، إحصاء..."
-data-i18n-placeholder="search"
->
-
-<button class="btn blue" onclick="searchResources()">
-🔎 <span data-i18n="searchBtn">بحث</span>
-</button>
-
 </div>
 
 <div class="filters">
 
-<select id="level">
+<input
+ id="search"
+ placeholder="🔎 ابحث عن Calculus, Algebra, Statistics..."
+ oninput="debouncedSearch()">
 
+<select id="level" onchange="loadResources()">
 <option value="">كل المستويات</option>
-<option value="primary">Primary / ابتدائي</option>
-<option value="middle">Middle / متوسط</option>
-<option value="secondary">Secondary / ثانوي</option>
-<option value="university">University / جامعة</option>
-<option value="competitive">Competition / مسابقات</option>
-
+<option value="Secondary">الثانوي</option>
+<option value="University">الجامعة</option>
 </select>
 
-<select id="subject">
-
+<select id="subject" onchange="loadResources()">
 <option value="">كل المواد</option>
-<option value="mathematics">Mathematics</option>
-<option value="algebra">Algebra</option>
-<option value="analysis">Analysis</option>
-<option value="geometry">Geometry</option>
-<option value="probability">Probability</option>
-<option value="statistics">Statistics</option>
-
+<option value="Mathematics">Mathematics</option>
+<option value="Algebra">Algebra</option>
+<option value="Calculus">Calculus</option>
+<option value="Statistics">Statistics</option>
+<option value="Linear Algebra">Linear Algebra</option>
+<option value="Advanced Mathematics">Advanced Mathematics</option>
 </select>
 
-<select id="type">
-
+<select id="type" onchange="loadResources()">
 <option value="">كل الأنواع</option>
-<option value="lesson">Lesson</option>
-<option value="exercise">Exercise</option>
-<option value="assignment">Assignment</option>
-<option value="test">Test</option>
-<option value="exam">Exam</option>
-<option value="research">Research</option>
-<option value="note">Note</option>
-<option value="bac">BAC</option>
-<option value="competition">Competition</option>
-
+<option value="Book">Books</option>
+<option value="Course">Courses</option>
+<option value="Exam">Exams</option>
+<option value="Exercises">Exercises</option>
+<option value="Lecture Notes">Lecture Notes</option>
+<option value="Study Guide">Study Guides</option>
 </select>
 
-<select id="language">
-
+<select id="language" onchange="loadResources()">
 <option value="">كل اللغات</option>
-<option value="ar">العربية</option>
-<option value="fr">Français</option>
 <option value="en">English</option>
-
+<option value="fr">Français</option>
+<option value="ar">العربية</option>
 </select>
 
-<select id="country">
-
+<select id="country" onchange="loadResources()">
 <option value="">كل الدول</option>
-<option value="Algeria">Algeria</option>
-<option value="France">France</option>
-<option value="Canada">Canada</option>
-<option value="United Kingdom">United Kingdom</option>
-<option value="United States">United States</option>
-<option value="International">International</option>
-
-</select>
-
-<button class="btn dark" onclick="resetFilters()">
-↻ <span data-i18n="reset">إعادة</span>
-</button>
-
-</div>
-
-<div class="library-toolbar">
-
-<div class="result-count">
-📚 <span id="resultText">0</span>
-</div>
-
-<select id="pageSize" onchange="changePageSize()">
-<option value="24">24 / page</option>
-<option value="48">48 / page</option>
-<option value="72">72 / page</option>
+<option value="USA">USA</option>
 </select>
 
 </div>
 
-<div id="resourceGrid" class="resource-grid">
-
-<div class="empty">
-⏳ جاري تحميل المكتبة...
+<div id="resources" class="resources">
+<div class="empty">جاري تحميل المكتبة...</div>
 </div>
 
-</div>
-
-<div id="pagination" class="pagination"></div>
-
+<div class="pagination">
+<button class="page" onclick="previousPage()">‹ السابق</button>
+<span id="pageInfo">1</span>
+<button class="page" onclick="nextPage()">التالي ›</button>
 </div>
 
 </section>
 
-<!-- DASHBOARD -->
-
-<section id="dashboard">
+<section class="section" id="games">
 
 <div class="section-title">
-
-<div>
-<h2>👤 <span data-i18n="myAccount">حسابي</span></h2>
-<p data-i18n="accountText">
-تقدمك وXP وشاراتك في HAMOU MATH.
-</p>
+<h2>🎮 HAMOU MATH GAMES</h2>
 </div>
 
+<div class="game-grid">
+
+<div class="game">
+<h3>⚡ Quick Math</h3>
+<p>اختبر سرعتك في الحساب.</p>
+<button class="btn primary" onclick="quickGame()">ابدأ</button>
 </div>
 
-<div class="dashboard">
-
-<div class="panel">
-
-<h2 id="accountName">👤 زائر</h2>
-
-<p id="accountEmail">
-سجل الدخول لحفظ تقدمك.
-</p>
-
-<div style="margin-top:20px">
-
-<strong>⚡ XP</strong>
-
-<div class="xpbar">
-<div class="xpfill" id="xpFill"></div>
+<div class="game">
+<h3>🧠 Algebra</h3>
+<p>حل معادلة بسيطة.</p>
+<button class="btn primary" onclick="algebraGame()">ابدأ</button>
 </div>
 
-<strong>
-<span id="xpValue">0</span> XP
-</strong>
-
+<div class="game">
+<h3>📐 Geometry</h3>
+<p>اختبر معلوماتك الهندسية.</p>
+<button class="btn primary" onclick="geometryGame()">ابدأ</button>
 </div>
 
-</div>
-
-<div class="panel">
-
-<h3>🔥 Daily Streak</h3>
-
-<p id="streak">0 يوم</p>
-
-<hr style="margin:15px 0;border:0;border-top:1px solid #eee">
-
-<h3>🏆 المستوى</h3>
-
-<p id="levelUser">1</p>
-
-</div>
-
-</div>
-
-<div class="panel" style="margin-top:17px">
-
-<h3>🏅 الشارات</h3>
-
-<div class="badges">
-
-<div class="badge-card">
-<div>🌱</div>
-<strong>البداية</strong>
-</div>
-
-<div class="badge-card">
-<div>🔥</div>
-<strong>10 تمارين</strong>
-</div>
-
-<div class="badge-card">
-<div>🧠</div>
-<strong>عقل رياضي</strong>
-</div>
-
-<div class="badge-card">
-<div>🏆</div>
-<strong>بطل</strong>
-</div>
-
+<div class="game">
+<h3>🎯 Probability</h3>
+<p>تحدي الاحتمالات.</p>
+<button class="btn primary" onclick="probabilityGame()">ابدأ</button>
 </div>
 
 </div>
 
 </section>
 
-<!-- GAMES -->
+<section class="section" id="global">
 
-<section id="games">
-
-<div class="section-title">
-
-<div>
-<h2>🎮 <span data-i18n="gamesTitle">عالم ألعاب الرياضيات</span></h2>
-<p>تعلم والعب واربح XP</p>
-</div>
-
-</div>
-
-<div class="games">
-
-<div class="game">
-<div class="game-icon">🧠</div>
-<h3>Math Brain</h3>
-<p>اختبر ذكاءك الرياضي</p>
-<button class="btn blue" onclick="startGame('Math Brain')">لعب</button>
-</div>
-
-<div class="game">
-<div class="game-icon">⚡</div>
-<h3>Quick Math</h3>
-<p>أجب بسرعة</p>
-<button class="btn blue" onclick="startGame('Quick Math')">لعب</button>
-</div>
-
-<div class="game">
-<div class="game-icon">🔢</div>
-<h3>Number Master</h3>
-<p>أتقن الأعداد</p>
-<button class="btn blue" onclick="startGame('Number Master')">لعب</button>
-</div>
-
-<div class="game">
-<div class="game-icon">📐</div>
-<h3>Geometry Master</h3>
-<p>تحديات الهندسة</p>
-<button class="btn blue" onclick="startGame('Geometry Master')">لعب</button>
-</div>
-
-<div class="game">
-<div class="game-icon">🏆</div>
-<h3>Global Challenge</h3>
-<p>نافس العالم</p>
-<button class="btn blue" onclick="startGame('Global Challenge')">لعب</button>
-</div>
-
-<div class="game">
-<div class="game-icon">🎲</div>
-<h3>Probability</h3>
-<p>تحدي الاحتمالات</p>
-<button class="btn blue" onclick="startGame('Probability')">لعب</button>
-</div>
-
-<div class="game">
-<div class="game-icon">📊</div>
-<h3>Statistics</h3>
-<p>ملك الإحصاء</p>
-<button class="btn blue" onclick="startGame('Statistics')">لعب</button>
-</div>
-
-<div class="game">
-<div class="game-icon">🧮</div>
-<h3>Algebra Rush</h3>
-<p>سباق الجبر</p>
-<button class="btn blue" onclick="startGame('Algebra Rush')">لعب</button>
-</div>
-
-<div class="game">
-<div class="game-icon">🚀</div>
-<h3>Equation Race</h3>
-<p>حل المعادلات</p>
-<button class="btn blue" onclick="startGame('Equation Race')">لعب</button>
-</div>
-
-<div class="game">
-<div class="game-icon">🌍</div>
-<h3>World Math</h3>
-<p>تحدي عالمي</p>
-<button class="btn blue" onclick="startGame('World Math')">لعب</button>
-</div>
-
-</div>
-
-</section>
-
-<!-- GLOBAL -->
-
-<section class="global">
+<div class="hero-card">
 
 <h2>🌍 HAMOU MATH GLOBAL</h2>
 
 <p>
-منصة واحدة للمتعلمين والمدرسين والباحثين من مختلف أنحاء العالم.
+الهدف هو بناء مكتبة عالمية تربط الطلاب والباحثين والمعلمين
+بالموارد التعليمية الحقيقية من الجامعات والمؤسسات المفتوحة.
 </p>
 
-<div class="global-grid">
-
-<div class="global-card">
-<strong>🇩🇿 الجزائر</strong>
-<p>المنهج الجزائري والبكالوريا</p>
-</div>
-
-<div class="global-card">
-<strong>🇫🇷 France</strong>
-<p>المناهج الفرنسية</p>
-</div>
-
-<div class="global-card">
-<strong>🇨🇦 Canada</strong>
-<p>المناهج الكندية</p>
-</div>
-
-<div class="global-card">
-<strong>🌐 International</strong>
-<p>موارد عالمية</p>
-</div>
-
-</div>
-
-</section>
-
-<!-- PREMIUM -->
-
-<section id="premium">
-
-<div class="section-title">
-
-<div>
-<h2>⭐ HAMOU MATH Premium</h2>
-<p>تجربة تعليمية متقدمة</p>
-</div>
-
-</div>
-
-<div class="premium-box">
-
-<div>
-
-<h2>🚀 ارفع مستواك</h2>
-
-<p>
-الوصول إلى موارد Premium، مسارات متقدمة،
-تحديات خاصة ومحتوى احترافي.
-</p>
-
-<div class="premium-list">
-
-<div>✅ مكتبة Premium</div>
-<div>✅ اختبارات متقدمة</div>
-<div>✅ تحديات خاصة</div>
-<div>✅ شارات حصرية</div>
-<div>✅ مسارات تعليمية</div>
-<div>✅ إحصائيات التقدم</div>
-
-</div>
-
-</div>
-
-<div style="text-align:center">
-
-<div style="font-size:42px">⭐</div>
-
-<h2>Premium</h2>
-
-<button class="btn primary" onclick="showToast('سيتم تفعيل نظام الدفع في المرحلة التالية')">
-الاشتراك
-</button>
-
+<div class="tags">
+<span class="tag">Algeria 🇩🇿</span>
+<span class="tag">France 🇫🇷</span>
+<span class="tag">USA 🇺🇸</span>
+<span class="tag">International 🌍</span>
 </div>
 
 </div>
@@ -1378,105 +578,20 @@ data-i18n-placeholder="search"
 </main>
 
 <footer>
-
-<div class="footer-grid">
-
-<div>
-
-<h3>HAMOU MATH</h3>
-
-<p>
-منصة عالمية لتعلم الرياضيات،
-التدريب، الاختبارات والتحديات.
-</p>
-
-</div>
-
-<div>
-
-<h3>المكتبة</h3>
-
-<p>الدروس</p>
-<p>التمارين</p>
-<p>الاختبارات</p>
-<p>البكالوريا</p>
-
-</div>
-
-<div>
-
-<h3>التعلم</h3>
-
-<p>الألعاب</p>
-<p>التحديات</p>
-<p>المسابقات</p>
-<p>البحوث</p>
-
-</div>
-
-<div>
-
-<h3>HAMOU MATH</h3>
-
-<p>🌍 Global</p>
-<p>📚 Millions-ready</p>
-<p>⚡ Smart Learning</p>
-
-</div>
-
-</div>
-
-<div class="copyright">
-© 2026 HAMOU MATH — Global Mathematics Education Platform
-</div>
-
+<strong>HAMOU MATH</strong>
+<br>
+Global Mathematics Education Platform
+<br><br>
+© 2026 HAMOU MATH
 </footer>
 
-<!-- LOGIN -->
-
-<div class="modal" id="loginModal">
-
-<div class="modal-box">
-
-<button class="modal-close" onclick="closeLogin()">×</button>
-
-<h2>👤 تسجيل الدخول</h2>
-
-<input
-id="email"
-type="email"
-placeholder="Email"
->
-
-<input
-id="password"
-type="password"
-placeholder="Password"
->
-
-<button
-class="btn blue main"
-onclick="login()">
-دخول
-</button>
-
-<button
-class="btn dark main"
-onclick="signup()">
-إنشاء حساب
-</button>
-
-</div>
-
-</div>
-
-<div class="toast" id="toast"></div>
+<div id="toast"></div>
 
 <script>
 
-/* =====================================================
+/* ======================================================
    SUPABASE
-===================================================== */
+====================================================== */
 
 const SUPABASE_URL =
 "https://ifurlsucekmaynuhsfva.supabase.co";
@@ -1484,935 +599,482 @@ const SUPABASE_URL =
 const SUPABASE_KEY =
 "sb_publishable_WRvn0kt8kJ3SSy2WG1ca4w_dzZQBrBU";
 
-const client =
-window.supabase.createClient(
-SUPABASE_URL,
-SUPABASE_KEY,
-{
-auth:{
-persistSession:true,
-autoRefreshToken:true,
-detectSessionInUrl:true
-}
-}
+const supabaseClient =
+supabase.createClient(
+ SUPABASE_URL,
+ SUPABASE_KEY
 );
 
-/* =====================================================
+
+/* ======================================================
    STATE
-===================================================== */
+====================================================== */
 
-let lang =
-localStorage.getItem("hamou_language") || "ar";
+let page = 0;
+const pageSize = 12;
+let searching = null;
 
-let page = 1;
 
-let pageSize = 24;
-
-let total = 0;
-
-/* =====================================================
+/* ======================================================
    TRANSLATIONS
-===================================================== */
+====================================================== */
 
-const T={
+const translations = {
 
 ar:{
-home:"الرئيسية",
-library:"المكتبة",
-games:"الألعاب",
-account:"حسابي",
-heroTitle:"الجيل الجديد من تعليم الرياضيات",
-heroText:"منصة عالمية للتعلم، التمرين، الاختبارات، البكالوريا، البحث العلمي والتحديات الرياضية.",
-explore:"استكشف المكتبة",
-login:"تسجيل الدخول",
-resources:"مورد",
-countries:"دولة مستهدفة",
-languages:"لغات",
-levels:"مستويات",
-categories:"استكشف المجالات",
-categoriesText:"اختر المجال الذي تريد دراسته",
-libraryTitle:"المكتبة العالمية",
-libraryText:"ابحث في مكتبة ضخمة قابلة للتوسع إلى ملايين الموارد.",
-search:"ابحث عن درس، تمرين، بكالوريا، إحصاء...",
-searchBtn:"بحث",
-reset:"إعادة",
-myAccount:"حسابي",
-accountText:"تقدمك وXP وشاراتك في HAMOU MATH.",
-gamesTitle:"عالم ألعاب الرياضيات",
-premium:"Premium",
-open:"فتح",
-download:"تحميل"
+ title:"مكتبة الرياضيات العالمية",
+ text:"اكتشف موارد رياضيات حقيقية من جامعات ومؤسسات تعليمية موثوقة حول العالم. دروس، كتب، تمارين، اختبارات ومقررات جامعية.",
+ library:"📚 المكتبة العالمية",
+ explore:"📚 استكشف المكتبة"
 },
 
 fr:{
-home:"Accueil",
-library:"Bibliothèque",
-games:"Jeux",
-account:"Compte",
-heroTitle:"La nouvelle génération de l'apprentissage des mathématiques",
-heroText:"Une plateforme mondiale pour apprendre, pratiquer, tester et relever des défis mathématiques.",
-explore:"Explorer",
-login:"Connexion",
-resources:"Ressources",
-countries:"Pays ciblés",
-languages:"Langues",
-levels:"Niveaux",
-categories:"Explorer les domaines",
-categoriesText:"Choisissez votre domaine",
-libraryTitle:"Bibliothèque mondiale",
-libraryText:"Recherchez dans une bibliothèque évolutive pouvant atteindre des millions de ressources.",
-search:"Rechercher un cours, exercice, bac...",
-searchBtn:"Rechercher",
-reset:"Réinitialiser",
-myAccount:"Mon compte",
-accountText:"Votre progression et vos XP.",
-gamesTitle:"Jeux de mathématiques",
-premium:"Premium",
-open:"Ouvrir",
-download:"Télécharger"
+ title:"Bibliothèque mondiale des mathématiques",
+ text:"Découvrez de vraies ressources mathématiques provenant d'universités et d'institutions éducatives reconnues.",
+ library:"📚 Bibliothèque mondiale",
+ explore:"📚 Explorer"
 },
 
 en:{
-home:"Home",
-library:"Library",
-games:"Games",
-account:"Account",
-heroTitle:"The next generation of mathematics learning",
-heroText:"A global platform for learning, practice, exams, research and mathematical challenges.",
-explore:"Explore Library",
-login:"Login",
-resources:"Resources",
-countries:"Target countries",
-languages:"Languages",
-levels:"Levels",
-categories:"Explore subjects",
-categoriesText:"Choose your subject",
-libraryTitle:"Global Library",
-libraryText:"Search a scalable library designed for millions of resources.",
-search:"Search lessons, exercises, exams...",
-searchBtn:"Search",
-reset:"Reset",
-myAccount:"My Account",
-accountText:"Your progress and XP.",
-gamesTitle:"Math Games",
-premium:"Premium",
-open:"Open",
-download:"Download"
+ title:"Global Mathematics Library",
+ text:"Discover real mathematics resources from universities and trusted educational institutions around the world.",
+ library:"📚 Global Library",
+ explore:"📚 Explore Library"
 }
 
 };
 
-/* =====================================================
-   LANGUAGE
-===================================================== */
+function changeLanguage(lang){
 
-function setLanguage(x){
+ localStorage.setItem("hamou_language",lang);
 
-lang=x;
+ const t =
+ translations[lang] || translations.en;
 
-localStorage.setItem(
-"hamou_language",
-x
-);
+ document.documentElement.lang = lang;
+ document.documentElement.dir =
+ lang === "ar" ? "rtl" : "ltr";
 
-document.documentElement.lang=x;
-
-document.documentElement.dir=
-x==="ar"?"rtl":"ltr";
-
-document
-.querySelectorAll("[data-i18n]")
-.forEach(el=>{
-
-const key=
-el.dataset.i18n;
-
-if(T[x][key])
-el.textContent=T[x][key];
-
-});
-
-document
-.querySelectorAll("[data-i18n-placeholder]")
-.forEach(el=>{
-
-const key=
-el.dataset.i18nPlaceholder;
-
-if(T[x][key])
-el.placeholder=T[x][key];
-
-});
-
-document
-.querySelectorAll(".languages button")
-.forEach(b=>b.classList.remove("active"));
-
-document
-.getElementById(x)
-.classList.add("active");
-
-renderCurrent();
+ document.getElementById("heroTitle").textContent=t.title;
+ document.getElementById("heroText").textContent=t.text;
 
 }
 
-/* =====================================================
-   LIBRARY
-===================================================== */
+
+/* ======================================================
+   TOAST
+====================================================== */
+
+function toast(message){
+
+ const el=document.getElementById("toast");
+
+ el.textContent=message;
+ el.style.display="block";
+
+ setTimeout(()=>{
+   el.style.display="none";
+ },3000);
+}
+
+
+/* ======================================================
+   COUNT
+====================================================== */
+
+async function loadCount(){
+
+ const {data,error} =
+ await supabaseClient
+ .rpc("math_resource_count");
+
+ if(error){
+
+   console.error(error);
+   return;
+ }
+
+ const total =
+ Number(data || 0);
+
+ document.getElementById("totalResources")
+ .textContent=total.toLocaleString();
+
+ document.getElementById("statTotal")
+ .textContent=total.toLocaleString();
+}
+
+
+/* ======================================================
+   LOAD RESOURCES
+====================================================== */
 
 async function loadResources(){
 
-const grid=
-document.getElementById("resourceGrid");
+ const query =
+ document.getElementById("search").value.trim();
 
-grid.innerHTML=
-`<div class="empty">⏳ جاري التحميل...</div>`;
+ const level =
+ document.getElementById("level").value;
 
-const q=
-document.getElementById("searchInput")
-.value
-.trim();
+ const subject =
+ document.getElementById("subject").value;
 
-const filters={
+ const type =
+ document.getElementById("type").value;
 
-p_query:q,
+ const language =
+ document.getElementById("language").value;
 
-p_level:
-document.getElementById("level").value,
+ const country =
+ document.getElementById("country").value;
 
-p_subject:
-document.getElementById("subject").value,
+ const offset =
+ page * pageSize;
 
-p_type:
-document.getElementById("type").value,
+ const {data,error} =
+ await supabaseClient
+ .rpc("search_math_resources",{
+   p_query:query,
+   p_level:level,
+   p_subject:subject,
+   p_type:type,
+   p_language:language,
+   p_country:country,
+   p_limit:pageSize,
+   p_offset:offset
+ });
 
-p_language:
-document.getElementById("language").value,
+ if(error){
 
-p_country:
-document.getElementById("country").value,
+   console.error(error);
 
-p_page:page,
+   document.getElementById("resources").innerHTML=
+   `<div class="empty">
+   حدث خطأ في تحميل الموارد.<br><br>
+   ${escapeHtml(error.message)}
+   </div>`;
 
-p_page_size:pageSize
+   return;
+ }
 
-};
+ renderResources(data || []);
 
-try{
-
-const {data,error}=
-await client.rpc(
-"search_math_resources",
-filters
-);
-
-if(error) throw error;
-
-const rows=data||[];
-
-total=rows.length
-?Number(rows[0].total_count)
-:0;
-
-renderResources(rows);
-
-renderPagination();
-
-document
-.getElementById("resultText")
-.textContent=
-total.toLocaleString();
-
-}catch(error){
-
-console.error(error);
-
-grid.innerHTML=`
-
-<div class="empty">
-
-<h2>⚠️</h2>
-
-<p>
-لم يتم تحميل الموارد.
-</p>
-
-<p style="font-size:13px">
-تأكد من تشغيل SQL الخاص بـ V29/V30 في Supabase.
-</p>
-
-</div>
-
-`;
-
+ document.getElementById("pageInfo")
+ .textContent=page+1;
 }
 
-}
 
-/* =====================================================
+/* ======================================================
    RENDER
-===================================================== */
+====================================================== */
 
-function titleOf(r){
+function renderResources(resources){
 
-if(lang==="fr")
-return r.title_fr;
+ const container =
+ document.getElementById("resources");
 
-if(lang==="en")
-return r.title_en;
+ if(!resources.length){
 
-return r.title_ar;
+   container.innerHTML=
+   `<div class="empty">
+   🔎 لا توجد موارد مطابقة لبحثك.
+   </div>`;
 
+   return;
+ }
+
+ container.innerHTML =
+ resources.map(resource => `
+
+ <article class="card">
+
+   <div class="card-top">
+
+     <span class="provider">
+       ${escapeHtml(resource.provider || "")}
+     </span>
+
+     <span class="type">
+       ${escapeHtml(resource.resource_type || "")}
+     </span>
+
+   </div>
+
+   <h3>
+     ${escapeHtml(resource.title)}
+   </h3>
+
+   <p>
+     ${escapeHtml(resource.description || "")}
+   </p>
+
+   <div class="tags">
+
+     ${(resource.tags || [])
+       .slice(0,5)
+       .map(tag =>
+        `<span class="tag">
+         ${escapeHtml(tag)}
+        </span>`
+       ).join("")}
+
+   </div>
+
+   <div class="meta">
+
+     ${escapeHtml(resource.level || "")}
+     ·
+     ${escapeHtml(resource.subject || "")}
+     ·
+     ${escapeHtml(resource.language || "")}
+
+   </div>
+
+   <div class="actions">
+
+     <button
+       class="btn primary"
+       onclick="openResource(${resource.id},'${encodeURIComponent(resource.source_url || "")}')">
+       فتح المورد
+     </button>
+
+     <button
+       class="btn secondary"
+       onclick="showLicense('${encodeURIComponent(resource.license_note || "")}')">
+       الترخيص
+     </button>
+
+   </div>
+
+ </article>
+
+ `).join("");
 }
 
-function descOf(r){
 
-if(lang==="fr")
-return r.description_fr;
-
-if(lang==="en")
-return r.description_en;
-
-return r.description_ar;
-
-}
-
-function esc(v){
-
-return String(v||"")
-.replace(/&/g,"&amp;")
-.replace(/</g,"&lt;")
-.replace(/>/g,"&gt;")
-.replace(/"/g,"&quot;")
-.replace(/'/g,"&#039;");
-
-}
-
-function renderResources(rows){
-
-const grid=
-document.getElementById("resourceGrid");
-
-if(!rows.length){
-
-grid.innerHTML=
-`<div class="empty">
-📭 لا توجد موارد مطابقة.
-</div>`;
-
-return;
-
-}
-
-grid.innerHTML=
-rows.map(r=>{
-
-const premium=
-r.is_premium
-?`<span class="tag premium">⭐ Premium</span>`
-:"";
-
-return `
-
-<article class="resource">
-
-<div class="resource-head">
-
-<span class="tag">
-${esc(r.resource_type)}
-</span>
-
-${premium}
-
-</div>
-
-<h3>
-${esc(titleOf(r))}
-</h3>
-
-<p class="resource-description">
-${esc(descOf(r))}
-</p>
-
-<div class="meta">
-
-<span>🎓 ${esc(r.level)}</span>
-
-<span>📘 ${esc(r.subject)}</span>
-
-<span>🌐 ${esc(r.language)}</span>
-
-<span>🌍 ${esc(r.country)}</span>
-
-<span>⭐ ${esc(r.difficulty)}</span>
-
-</div>
-
-<div class="meta">
-
-<span>👁 ${Number(r.views||0).toLocaleString()}</span>
-
-<span>⬇ ${Number(r.downloads||0).toLocaleString()}</span>
-
-<span>⭐ ${Number(r.rating||0)}</span>
-
-</div>
-
-<div class="resource-footer">
-
-<button
-class="dark"
-onclick="openResource('${r.id}',${JSON.stringify(r.file_url||"")})">
-
-${T[lang].open}
-
-</button>
-
-<button
-class="primary"
-onclick="downloadResource('${r.id}',${JSON.stringify(r.file_url||"")})">
-
-${T[lang].download}
-
-</button>
-
-</div>
-
-</article>
-
-`;
-
-}).join("");
-
-}
-
-/* =====================================================
-   PAGINATION
-===================================================== */
-
-function renderPagination(){
-
-const box=
-document.getElementById("pagination");
-
-const pages=
-Math.max(1,Math.ceil(total/pageSize));
-
-let html="";
-
-if(page>1){
-
-html+=`
-<button onclick="gotoPage(${page-1})">
-‹
-</button>
-`;
-
-}
-
-let start=Math.max(1,page-2);
-
-let end=Math.min(pages,start+4);
-
-for(let i=start;i<=end;i++){
-
-html+=`
-<button
-class="${i===page?"active":""}"
-onclick="gotoPage(${i})">
-${i}
-</button>
-`;
-
-}
-
-if(page<pages){
-
-html+=`
-<button onclick="gotoPage(${page+1})">
-›
-</button>
-`;
-
-}
-
-box.innerHTML=html;
-
-}
-
-function gotoPage(p){
-
-page=p;
-
-loadResources();
-
-document
-.getElementById("library")
-.scrollIntoView({
-behavior:"smooth"
-});
-
-}
-
-function changePageSize(){
-
-pageSize=
-Number(
-document.getElementById("pageSize").value
-);
-
-page=1;
-
-loadResources();
-
-}
-
-/* =====================================================
-   SEARCH
-===================================================== */
-
-function searchResources(){
-
-page=1;
-
-loadResources();
-
-}
-
-document
-.getElementById("searchInput")
-.addEventListener(
-"keydown",
-e=>{
-if(e.key==="Enter")
-searchResources();
-}
-);
-
-/* =====================================================
-   FILTERS
-===================================================== */
-
-function resetFilters(){
-
-document.getElementById("searchInput").value="";
-
-document.getElementById("level").value="";
-
-document.getElementById("subject").value="";
-
-document.getElementById("type").value="";
-
-document.getElementById("language").value="";
-
-document.getElementById("country").value="";
-
-page=1;
-
-loadResources();
-
-}
-
-function quickFilter(subject){
-
-document.getElementById("subject").value=subject;
-
-page=1;
-
-go("library");
-
-loadResources();
-
-}
-
-function quickType(type){
-
-document.getElementById("type").value=type;
-
-page=1;
-
-go("library");
-
-loadResources();
-
-}
-
-/* =====================================================
-   RESOURCE
-===================================================== */
+/* ======================================================
+   OPEN REAL SOURCE
+====================================================== */
 
 async function openResource(id,url){
 
-try{
+ await supabaseClient
+ .rpc("increment_resource_views",{
+   p_id:id
+ });
 
-await client.rpc(
-"increment_resource_views",
-{p_id:id}
-);
+ const decoded =
+ decodeURIComponent(url);
 
-}catch(e){}
+ if(decoded){
 
-if(url){
+   window.open(decoded,"_blank","noopener");
 
-window.open(url,"_blank");
+ }else{
 
-return;
+   toast("لا يوجد رابط للمورد.");
+
+ }
+}
+
+
+/* ======================================================
+   LICENSE
+====================================================== */
+
+function showLicense(encoded){
+
+ const text =
+ decodeURIComponent(encoded);
+
+ toast(text || "تحقق من شروط المصدر قبل إعادة الاستخدام.");
+}
+
+
+/* ======================================================
+   SEARCH DEBOUNCE
+====================================================== */
+
+function debouncedSearch(){
+
+ clearTimeout(searching);
+
+ searching =
+ setTimeout(()=>{
+   page=0;
+   loadResources();
+ },400);
 
 }
 
-showToast(
-"هذا المورد لا يحتوي على ملف PDF حاليًا."
-);
+
+/* ======================================================
+   PAGINATION
+====================================================== */
+
+function nextPage(){
+
+ page++;
+
+ loadResources();
+
+ window.scrollTo({
+   top:document.getElementById("library").offsetTop-80,
+   behavior:"smooth"
+ });
 
 }
 
-async function downloadResource(id,url){
+function previousPage(){
 
-try{
+ if(page<=0){
+   return;
+ }
 
-await client.rpc(
-"increment_resource_downloads",
-{p_id:id}
-);
+ page--;
 
-}catch(e){}
+ loadResources();
 
-if(url){
-
-window.open(url,"_blank");
-
-return;
+ window.scrollTo({
+   top:document.getElementById("library").offsetTop-80,
+   behavior:"smooth"
+ });
 
 }
 
-showToast(
-"لا يوجد ملف للتحميل حاليًا."
-);
 
-}
-
-/* =====================================================
-   AUTH
-===================================================== */
-
-async function login(){
-
-const email=
-document.getElementById("email")
-.value.trim();
-
-const password=
-document.getElementById("password")
-.value;
-
-if(!email||!password){
-
-showToast("أدخل البريد وكلمة المرور.");
-
-return;
-
-}
-
-const {data,error}=
-await client.auth.signInWithPassword({
-email,
-password
-});
-
-if(error){
-
-showToast(error.message);
-
-return;
-
-}
-
-closeLogin();
-
-updateUser(data.user);
-
-addXP(10);
-
-showToast("تم تسجيل الدخول بنجاح 🎉");
-
-}
-
-async function signup(){
-
-const email=
-document.getElementById("email")
-.value.trim();
-
-const password=
-document.getElementById("password")
-.value;
-
-if(password.length<6){
-
-showToast(
-"كلمة المرور يجب أن تكون 6 أحرف على الأقل."
-);
-
-return;
-
-}
-
-const {error}=
-await client.auth.signUp({
-email,
-password
-});
-
-if(error){
-
-showToast(error.message);
-
-return;
-
-}
-
-showToast(
-"تم إنشاء الحساب. تحقق من بريدك الإلكتروني إذا لزم."
-);
-
-}
-
-/* =====================================================
-   USER
-===================================================== */
-
-async function loadUser(){
-
-const {data}=
-await client.auth.getUser();
-
-if(data.user){
-
-updateUser(data.user);
-
-}
-
-}
-
-function updateUser(user){
-
-document.getElementById("accountName")
-.textContent=
-"👤 "+(user.email||"User");
-
-document.getElementById("accountEmail")
-.textContent=
-user.email||"";
-
-}
-
-function addXP(amount){
-
-let xp=
-Number(
-localStorage.getItem("hamou_xp")||0
-);
-
-xp+=amount;
-
-localStorage.setItem(
-"hamou_xp",
-xp
-);
-
-updateXP();
-
-}
-
-function updateXP(){
-
-const xp=
-Number(
-localStorage.getItem("hamou_xp")||0
-);
-
-document.getElementById("xpValue")
-.textContent=xp;
-
-document.getElementById("xpStat")
-.textContent=xp;
-
-const level=
-Math.floor(xp/100)+1;
-
-document.getElementById("levelUser")
-.textContent=level;
-
-const progress=xp%100;
-
-document.getElementById("xpFill")
-.style.width=
-progress+"%";
-
-}
-
-/* =====================================================
+/* ======================================================
    GAMES
-===================================================== */
+====================================================== */
 
-function startGame(name){
+function quickGame(){
 
-addXP(5);
+ const a =
+ Math.floor(Math.random()*20)+1;
 
-showToast(
-"🎮 تم بدء "+name+" — حصلت على 5 XP"
-);
+ const b =
+ Math.floor(Math.random()*20)+1;
 
-}
+ const answer =
+ prompt(`احسب:\n\n${a} + ${b} = ?`);
 
-/* =====================================================
-   MODAL
-===================================================== */
+ if(answer !== null &&
+ Number(answer) === a+b){
 
-function openLogin(){
+   toast("🎉 إجابة صحيحة!");
 
-document
-.getElementById("loginModal")
-.classList.add("show");
+ }else{
 
-}
+   toast("❌ حاول مرة أخرى.");
 
-function closeLogin(){
-
-document
-.getElementById("loginModal")
-.classList.remove("show");
+ }
 
 }
 
-/* =====================================================
-   NAV
-===================================================== */
+function algebraGame(){
 
-function go(id){
+ const x =
+ Math.floor(Math.random()*10)+1;
 
-const el=
-document.getElementById(id);
+ const b =
+ Math.floor(Math.random()*10)+1;
 
-if(el){
+ const c =
+ x+b;
 
-el.scrollIntoView({
-behavior:"smooth"
-});
+ const answer =
+ prompt(`x + ${b} = ${c}\n\nما قيمة x؟`);
 
-}
+ if(Number(answer)===x){
 
-}
+   toast("🎉 ممتاز!");
 
-/* =====================================================
-   TOAST
-===================================================== */
+ }else{
 
-function showToast(msg){
+   toast(`❌ الإجابة الصحيحة هي ${x}`);
 
-const t=
-document.getElementById("toast");
-
-t.textContent=msg;
-
-t.style.display="block";
-
-clearTimeout(window.toastTimer);
-
-window.toastTimer=
-setTimeout(()=>{
-t.style.display="none";
-},3500);
+ }
 
 }
 
-/* =====================================================
-   RENDER LANGUAGE
-===================================================== */
+function geometryGame(){
 
-function renderCurrent(){
+ const r =
+ Math.floor(Math.random()*9)+2;
 
-setLanguageWithoutReload();
+ const answer =
+ prompt(`دائرة نصف قطرها ${r}.\n\nما محيطها بدلالة π؟`);
 
-loadResources();
+ const expected =
+ 2*r;
 
-}
+ if(Number(answer)===expected){
 
-function setLanguageWithoutReload(){
+   toast("🎉 صحيح! المحيط = 2πr");
 
-document.documentElement.lang=lang;
+ }else{
 
-document.documentElement.dir=
-lang==="ar"?"rtl":"ltr";
+   toast(`❌ المعامل الصحيح هو ${expected}`);
 
-document
-.querySelectorAll(".languages button")
-.forEach(b=>b.classList.remove("active"));
-
-document
-.getElementById(lang)
-.classList.add("active");
-
-document
-.querySelectorAll("[data-i18n]")
-.forEach(el=>{
-
-const key=el.dataset.i18n;
-
-if(T[lang][key])
-el.textContent=T[lang][key];
-
-});
-
-document
-.querySelectorAll("[data-i18n-placeholder]")
-.forEach(el=>{
-
-const key=
-el.dataset.i18nPlaceholder;
-
-if(T[lang][key])
-el.placeholder=T[lang][key];
-
-});
+ }
 
 }
 
-/* =====================================================
+function probabilityGame(){
+
+ const answer =
+ prompt(
+ `نرمي قطعة نقد عادلة مرة واحدة.\n\n
+ احتمال ظهور الوجه = ؟\n\n
+اكتب 0.5`
+ );
+
+ if(Math.abs(Number(answer)-0.5)<0.001){
+
+   toast("🎯 صحيح!");
+
+ }else{
+
+   toast("❌ الإجابة الصحيحة 0.5");
+
+ }
+
+}
+
+
+/* ======================================================
+   SECURITY
+====================================================== */
+
+function escapeHtml(value){
+
+ return String(value ?? "")
+ .replaceAll("&","&amp;")
+ .replaceAll("<","&lt;")
+ .replaceAll(">","&gt;")
+ .replaceAll('"',"&quot;")
+ .replaceAll("'","&#039;");
+
+}
+
+
+/* ======================================================
    START
-===================================================== */
+====================================================== */
 
-setLanguageWithoutReload();
+(async function(){
 
-updateXP();
+ const saved =
+ localStorage.getItem("hamou_language") || "ar";
 
-loadUser();
+ document.getElementById("lang").value=saved;
 
-loadResources();
+ changeLanguage(saved);
 
-(async()=>{
+ await loadCount();
 
-try{
-
-const {data}=
-await client.rpc(
-"math_resource_count"
-);
-
-if(data!=null){
-
-document
-.getElementById("resourceCount")
-.textContent=
-Number(data).toLocaleString();
-
-}
-
-}catch(e){
-
-console.log(e);
-
-}
+ await loadResources();
 
 })();
 

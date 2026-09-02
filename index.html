@@ -1,393 +1,364 @@
-```html
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ar" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#07111f">
-<meta name="description" content="HAMOU MATH GLOBAL - منصة عالمية لتعلم الرياضيات، الألعاب، التحديات، XP والترتيب العالمي.">
-<meta name="keywords" content="HAMOU MATH, Mathematics, Math Games, الرياضيات, رياضيات, BAC, تعليم">
-<title>HAMOU MATH GLOBAL 🌍</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#0f172a">
+<meta name="description" content="HAMOU MATH - منصة عالمية لتعلم الرياضيات">
+<title>HAMOU MATH | منصة الرياضيات العالمية</title>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
 :root{
-  --bg:#07111f;
-  --bg2:#0b1728;
-  --card:#101f33;
-  --card2:#14263e;
-  --text:#f4f8ff;
-  --muted:#9fb0c5;
-  --primary:#4f8cff;
-  --primary2:#6b5cff;
-  --success:#20c997;
-  --warning:#ffca3a;
-  --danger:#ff5c70;
-  --border:rgba(255,255,255,.09);
-  --shadow:0 18px 50px rgba(0,0,0,.28);
+  --bg:#f6f8fc;
+  --card:#fff;
+  --text:#172033;
+  --muted:#64748b;
+  --primary:#2563eb;
+  --primary2:#7c3aed;
+  --border:#e5e7eb;
+  --success:#16a34a;
+  --danger:#dc2626;
+  --shadow:0 12px 35px rgba(15,23,42,.08);
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{
   margin:0;
-  font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
-  background:
-    radial-gradient(circle at 10% 0%,rgba(79,140,255,.16),transparent 30%),
-    radial-gradient(circle at 90% 10%,rgba(107,92,255,.13),transparent 30%),
-    var(--bg);
+  font-family:Arial,"Noto Sans Arabic",sans-serif;
+  background:var(--bg);
   color:var(--text);
 }
 button,input,select{font:inherit}
 button{cursor:pointer}
 a{text-decoration:none;color:inherit}
-.container{width:min(1180px,92%);margin:auto}
 
-/* HEADER */
 header{
   position:sticky;
   top:0;
-  z-index:1000;
-  backdrop-filter:blur(18px);
-  background:rgba(7,17,31,.84);
+  z-index:100;
+  background:rgba(255,255,255,.94);
+  backdrop-filter:blur(14px);
   border-bottom:1px solid var(--border);
 }
 .nav{
-  min-height:72px;
+  max-width:1200px;
+  margin:auto;
+  min-height:70px;
+  padding:10px 18px;
   display:flex;
   align-items:center;
   justify-content:space-between;
   gap:15px;
 }
-.brand{
-  display:flex;
-  align-items:center;
-  gap:10px;
-  font-weight:900;
-  font-size:21px;
-}
 .logo{
-  width:43px;height:43px;
-  border-radius:14px;
-  display:grid;place-items:center;
-  background:linear-gradient(135deg,var(--primary),var(--primary2));
-  box-shadow:0 10px 30px rgba(79,140,255,.3);
-}
-.navlinks{display:flex;gap:7px;flex-wrap:wrap}
-.navlinks button{
-  border:0;
-  background:transparent;
-  color:var(--muted);
-  padding:9px 12px;
-  border-radius:10px;
-}
-.navlinks button:hover{background:var(--card);color:#fff}
-.actions{display:flex;gap:8px;align-items:center}
-.iconbtn,.btn{
-  border:1px solid var(--border);
-  color:#fff;
-  background:var(--card);
-  padding:10px 14px;
-  border-radius:12px;
-}
-.btn.primary{
-  border:0;
-  background:linear-gradient(135deg,var(--primary),var(--primary2));
-}
-.btn.success{
-  border:0;
-  background:linear-gradient(135deg,#11b886,#0d9f78);
-}
-.btn.gold{
-  border:0;
-  color:#111;
-  background:linear-gradient(135deg,#ffd76a,#ffb703);
-}
-
-/* HERO */
-.hero{padding:70px 0 45px}
-.heroGrid{
-  display:grid;
-  grid-template-columns:1.25fr .75fr;
-  gap:30px;
-  align-items:center;
-}
-.badge{
-  display:inline-flex;
-  gap:8px;
-  align-items:center;
-  padding:8px 13px;
-  border:1px solid rgba(79,140,255,.3);
-  background:rgba(79,140,255,.1);
-  color:#aecdff;
-  border-radius:999px;
-  font-size:13px;
-}
-.hero h1{
-  font-size:clamp(42px,7vw,76px);
-  line-height:.98;
-  margin:20px 0;
-  letter-spacing:-3px;
-}
-.gradient{
-  background:linear-gradient(90deg,#6da5ff,#9b8cff,#62e5c0);
+  font-weight:900;
+  font-size:22px;
+  background:linear-gradient(90deg,var(--primary),var(--primary2));
   -webkit-background-clip:text;
   color:transparent;
 }
-.hero p{
-  color:var(--muted);
-  font-size:18px;
-  line-height:1.8;
-  max-width:680px;
+.navlinks{
+  display:flex;
+  gap:7px;
+  flex-wrap:wrap;
+  justify-content:center;
 }
-.heroBtns{display:flex;gap:10px;flex-wrap:wrap;margin-top:25px}
-.globe{
-  min-height:330px;
-  border:1px solid var(--border);
+.navlinks button,.nav-action{
+  border:0;
+  background:transparent;
+  padding:9px 11px;
+  border-radius:12px;
+  color:var(--text);
+}
+.navlinks button:hover,.nav-action:hover{background:#eef2ff}
+.menu{
+  display:none;
+  border:0;
+  background:#eef2ff;
+  border-radius:10px;
+  padding:9px 12px;
+}
+
+.container{
+  width:min(1200px,calc(100% - 28px));
+  margin:auto;
+}
+.hero{
+  margin-top:28px;
+  padding:50px 28px;
   border-radius:30px;
   background:
-    radial-gradient(circle at 50% 50%,rgba(79,140,255,.22),transparent 45%),
-    var(--card);
+    radial-gradient(circle at 90% 10%,rgba(124,58,237,.25),transparent 35%),
+    radial-gradient(circle at 10% 90%,rgba(37,99,235,.22),transparent 35%),
+    #0f172a;
+  color:white;
   display:grid;
-  place-items:center;
-  box-shadow:var(--shadow);
+  grid-template-columns:1.3fr .7fr;
+  gap:30px;
+  overflow:hidden;
 }
-.globe span{font-size:150px;filter:drop-shadow(0 20px 30px rgba(0,0,0,.3))}
+.hero h1{
+  font-size:clamp(34px,6vw,64px);
+  line-height:1.05;
+  margin:15px 0;
+}
+.hero p{
+  color:#cbd5e1;
+  font-size:18px;
+  line-height:1.8;
+}
+.badge{
+  display:inline-flex;
+  padding:8px 13px;
+  border-radius:999px;
+  background:rgba(255,255,255,.12);
+  border:1px solid rgba(255,255,255,.15);
+}
+.hero-art{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:90px;
+  font-weight:900;
+  transform:rotate(-5deg);
+}
+.actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  margin-top:22px;
+}
+.btn{
+  border:0;
+  border-radius:14px;
+  padding:12px 17px;
+  font-weight:800;
+  transition:.2s;
+}
+.btn:hover{transform:translateY(-2px)}
+.btn-primary{
+  color:#fff;
+  background:linear-gradient(90deg,var(--primary),var(--primary2));
+}
+.btn-light{background:#fff;color:#172033}
+.btn-outline{
+  background:transparent;
+  border:1px solid var(--border);
+}
+.btn-danger{background:#fee2e2;color:#991b1b}
 
-/* STATS */
+section{padding:38px 0}
+.section-title{
+  display:flex;
+  align-items:end;
+  justify-content:space-between;
+  gap:15px;
+  margin-bottom:18px;
+}
+.section-title h2{margin:0;font-size:28px}
+.muted{color:var(--muted)}
+
 .stats{
   display:grid;
   grid-template-columns:repeat(4,1fr);
-  gap:14px;
-  margin:20px 0 55px;
+  gap:15px;
+  margin-top:20px;
 }
-.stat{
-  padding:20px;
+.stat,.card{
   background:var(--card);
-  border:1px solid var(--border);
-  border-radius:18px;
-}
-.stat .num{font-size:28px;font-weight:900}
-.stat .label{color:var(--muted);margin-top:5px}
-
-/* SECTIONS */
-section{padding:45px 0}
-.sectionHead{
-  display:flex;
-  justify-content:space-between;
-  gap:15px;
-  align-items:end;
-  margin-bottom:22px;
-}
-.sectionHead h2{margin:0;font-size:30px}
-.sectionHead p{margin:5px 0 0;color:var(--muted)}
-.grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:15px;
-}
-.card{
-  background:linear-gradient(180deg,var(--card),var(--bg2));
   border:1px solid var(--border);
   border-radius:20px;
   padding:20px;
-  box-shadow:0 8px 30px rgba(0,0,0,.12);
+  box-shadow:var(--shadow);
 }
-.card:hover{transform:translateY(-2px);transition:.2s}
-.cardIcon{font-size:35px}
-.card h3{margin:12px 0 8px}
+.stat strong{
+  display:block;
+  font-size:29px;
+  margin-top:8px;
+}
+.grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:16px;
+}
+.card h3{margin-top:0}
 .card p{color:var(--muted);line-height:1.7}
-.card button{width:100%;margin-top:10px}
 
-/* GAMES */
+.library-tools{
+  display:grid;
+  grid-template-columns:2fr 1fr 1fr;
+  gap:10px;
+}
+input,select{
+  width:100%;
+  border:1px solid var(--border);
+  background:#fff;
+  padding:13px 14px;
+  border-radius:13px;
+  outline:none;
+}
+input:focus,select:focus{border-color:var(--primary)}
+
 .game{
   position:relative;
   overflow:hidden;
 }
-.game .tag{
-  position:absolute;
-  top:15px;
-  left:15px;
-  background:rgba(255,202,58,.12);
-  color:#ffd76a;
-  border:1px solid rgba(255,202,58,.2);
-  padding:5px 9px;
-  border-radius:8px;
-  font-size:12px;
-}
+.game-icon{font-size:40px}
+.game button{margin-top:10px}
 
-/* LEADERBOARD */
-.leader{
-  display:flex;
-  align-items:center;
-  gap:13px;
-  padding:14px;
-  border-bottom:1px solid var(--border);
+.challenge{
+  border:1px solid #ddd6fe;
+  background:linear-gradient(135deg,#fff,#f5f3ff);
 }
-.leader:last-child{border:0}
-.rank{
-  width:35px;height:35px;
-  border-radius:50%;
-  display:grid;place-items:center;
-  background:var(--card2);
+.xp{
+  color:var(--primary);
   font-weight:900;
 }
-.avatar{
-  width:43px;height:43px;
-  border-radius:50%;
-  display:grid;place-items:center;
-  background:linear-gradient(135deg,var(--primary),var(--primary2));
-  font-weight:900;
-}
-.leaderInfo{flex:1}
-.leaderInfo small{color:var(--muted)}
-.xp{font-weight:900;color:#8fb7ff}
 
-/* PROFILE */
 .profile{
   display:grid;
-  grid-template-columns:.8fr 1.2fr;
+  grid-template-columns:1fr 1fr;
+  gap:18px;
+}
+.profile-main{
+  display:flex;
+  align-items:center;
   gap:15px;
 }
+.avatar{
+  width:70px;
+  height:70px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:white;
+  font-size:28px;
+  font-weight:900;
+  background:linear-gradient(135deg,var(--primary),var(--primary2));
+}
 .progress{
-  height:10px;
-  background:#07101d;
-  border-radius:20px;
+  height:12px;
+  border-radius:999px;
+  background:#e2e8f0;
   overflow:hidden;
-  margin:12px 0;
+  margin-top:10px;
 }
 .progress span{
-  display:block;height:100%;
+  display:block;
+  height:100%;
   background:linear-gradient(90deg,var(--primary),var(--primary2));
-  width:0;
+  width:0%;
 }
-.miniStats{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:10px;
-}
-.mini{
-  background:var(--card2);
-  padding:14px;
-  border-radius:14px;
-  text-align:center;
-}
-.mini b{display:block;font-size:22px}
 
-/* MODAL */
+.table-wrap{overflow:auto}
+table{
+  width:100%;
+  border-collapse:collapse;
+  min-width:550px;
+}
+th,td{
+  padding:13px;
+  border-bottom:1px solid var(--border);
+  text-align:right;
+}
+.rank{font-weight:900}
+
+footer{
+  margin-top:35px;
+  background:#0f172a;
+  color:#cbd5e1;
+  padding:35px 0;
+}
+.footer-grid{
+  display:grid;
+  grid-template-columns:2fr 1fr 1fr;
+  gap:25px;
+}
+footer h3{color:#fff}
+
 .modal{
   position:fixed;
   inset:0;
-  z-index:3000;
-  background:rgba(0,0,0,.72);
+  z-index:1000;
   display:none;
-  place-items:center;
-  padding:20px;
+  align-items:center;
+  justify-content:center;
+  padding:18px;
+  background:rgba(2,6,23,.7);
+  backdrop-filter:blur(5px);
 }
-.modal.show{display:grid}
-.modalBox{
-  width:min(500px,100%);
+.modal.show{display:flex}
+.modal-box{
+  width:min(470px,100%);
   max-height:90vh;
   overflow:auto;
-  background:var(--bg2);
-  border:1px solid var(--border);
-  border-radius:24px;
+  background:#fff;
+  border-radius:25px;
   padding:24px;
-  box-shadow:var(--shadow);
+  box-shadow:0 25px 80px rgba(0,0,0,.25);
 }
-.modalTop{
+.modal-head{
   display:flex;
-  justify-content:space-between;
   align-items:center;
+  justify-content:space-between;
 }
 .close{
   border:0;
-  background:var(--card);
-  color:#fff;
-  border-radius:10px;
-  width:38px;height:38px;
+  background:#f1f5f9;
+  width:38px;
+  height:38px;
+  border-radius:50%;
 }
-.field{margin:13px 0}
-.field label{display:block;color:var(--muted);margin-bottom:7px}
-.field input,.field select{
-  width:100%;
-  background:#07101d;
-  color:#fff;
-  border:1px solid var(--border);
-  border-radius:11px;
-  padding:12px;
-  outline:none;
+.form-group{margin:13px 0}
+.form-group label{
+  display:block;
+  font-weight:700;
+  margin-bottom:7px;
 }
-.field input:focus{border-color:var(--primary)}
-.formActions{display:flex;gap:8px;margin-top:15px}
-.formActions button{flex:1}
-
-/* QUIZ */
-.quizQuestion{
-  font-size:28px;
-  font-weight:900;
-  text-align:center;
-  padding:25px 10px;
-}
-.answers{display:grid;gap:9px}
-.answer{
-  border:1px solid var(--border);
-  background:var(--card);
-  color:#fff;
-  padding:14px;
+.notice{
+  padding:12px 14px;
   border-radius:12px;
-  text-align:center;
+  margin:10px 0;
+  display:none;
 }
-.answer:hover{border-color:var(--primary)}
-.timer{text-align:center;color:#ffd76a;font-weight:900}
+.notice.error{background:#fee2e2;color:#991b1b}
+.notice.success{background:#dcfce7;color:#166534}
 
-/* FOOTER */
-footer{
-  margin-top:50px;
-  border-top:1px solid var(--border);
-  padding:35px 0;
-  color:var(--muted);
-}
-.footerGrid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:20px;
-}
-.social{display:flex;gap:8px;flex-wrap:wrap}
+.hidden{display:none!important}
+.center{text-align:center}
 
-/* TOAST */
-.toast{
-  position:fixed;
-  bottom:20px;
-  left:20px;
-  z-index:5000;
-  padding:13px 17px;
-  border-radius:12px;
-  background:#12243a;
-  border:1px solid var(--border);
-  box-shadow:var(--shadow);
-  transform:translateY(100px);
-  opacity:0;
-  transition:.3s;
-}
-.toast.show{transform:translateY(0);opacity:1}
-
-/* MOBILE */
 @media(max-width:850px){
+  .hero{grid-template-columns:1fr}
+  .hero-art{display:none}
+  .stats{grid-template-columns:repeat(2,1fr)}
+  .grid{grid-template-columns:repeat(2,1fr)}
+  .profile{grid-template-columns:1fr}
+  .footer-grid{grid-template-columns:1fr 1fr}
   .navlinks{display:none}
-  .heroGrid,.profile{grid-template-columns:1fr}
-  .grid{grid-template-columns:1fr 1fr}
-  .stats{grid-template-columns:1fr 1fr}
-  .globe{min-height:240px}
+  .navlinks.open{
+    display:flex;
+    position:absolute;
+    top:70px;
+    right:10px;
+    left:10px;
+    padding:12px;
+    background:#fff;
+    border:1px solid var(--border);
+    border-radius:18px;
+    box-shadow:var(--shadow);
+  }
+  .menu{display:block}
 }
 @media(max-width:560px){
-  .container{width:94%}
-  .hero{padding-top:40px}
-  .hero h1{font-size:48px}
-  .hero p{font-size:16px}
-  .grid,.stats,.miniStats,.footerGrid{grid-template-columns:1fr}
-  .actions .btn span{display:none}
-  .globe span{font-size:100px}
+  .hero{padding:35px 20px}
+  .stats{grid-template-columns:1fr 1fr}
+  .grid{grid-template-columns:1fr}
+  .library-tools{grid-template-columns:1fr}
+  .footer-grid{grid-template-columns:1fr}
+  .nav{padding:9px 12px}
 }
 </style>
 </head>
@@ -395,910 +366,750 @@ footer{
 <body>
 
 <header>
-<div class="container nav">
-  <a class="brand" href="#home">
-    <span class="logo">∑</span>
-    <span>HAMOU MATH</span>
-  </a>
+  <nav class="nav">
+    <div class="logo">HAMOU MATH 🌍</div>
 
-  <nav class="navlinks">
-    <button onclick="go('home')">الرئيسية</button>
-    <button onclick="go('library')">المكتبة</button>
-    <button onclick="go('games')">الألعاب</button>
-    <button onclick="go('challenges')">التحديات</button>
-    <button onclick="go('leaderboard')">الترتيب</button>
-    <button onclick="go('premium')">Premium</button>
+    <button class="menu" id="menuBtn">☰</button>
+
+    <div class="navlinks" id="navlinks">
+      <button onclick="go('home')">الرئيسية</button>
+      <button onclick="go('library')">📚 المكتبة</button>
+      <button onclick="go('games')">🎮 الألعاب</button>
+      <button onclick="go('challenges')">⚔️ التحديات</button>
+      <button onclick="go('leaderboard')">🏆 الترتيب</button>
+      <button onclick="go('premium')">💎 Premium</button>
+      <button onclick="go('account')">👤 حسابي</button>
+    </div>
+
+    <button class="nav-action" id="accountBtn">👤 دخول</button>
   </nav>
-
-  <div class="actions">
-    <button class="iconbtn" onclick="toggleLang()">🌐 <span id="langText">AR</span></button>
-    <button class="btn primary" id="accountBtn" onclick="openAuth()">دخول</button>
-  </div>
-</div>
 </header>
 
 <main>
 
-<section class="hero" id="home">
-<div class="container heroGrid">
-  <div>
-    <span class="badge">🌍 GLOBAL EDUCATION PLATFORM</span>
-    <h1>
-      HAMOU<br>
-      <span class="gradient">MATH</span>
-    </h1>
-    <p>
-      منصة رياضيات حديثة تجمع التعلم، الألعاب، التحديات،
-      XP والترتيب العالمي في تجربة واحدة للطلاب من كل مكان.
-    </p>
+<section id="home">
+<div class="container">
+  <div class="hero">
+    <div>
+      <span class="badge">🚀 الجيل الجديد من تعليم الرياضيات</span>
+      <h1>تعلم الرياضيات.<br>العب. نافس. تفوق.</h1>
+      <p>
+        HAMOU MATH منصة تعليمية عالمية تجمع الدروس والتمارين
+        والاختبارات والألعاب والتحديات والتنافس في مكان واحد.
+      </p>
+      <div class="actions">
+        <button class="btn btn-primary" onclick="go('library')">📚 اكتشف المكتبة</button>
+        <button class="btn btn-light" onclick="openAuth('signup')">🚀 أنشئ حسابك مجانًا</button>
+      </div>
+    </div>
+    <div class="hero-art">√(x²+y²)</div>
+  </div>
 
-    <div class="heroBtns">
-      <button class="btn primary" onclick="go('games')">🎮 ابدأ اللعب</button>
-      <button class="btn" onclick="go('library')">📚 اكتشف المكتبة</button>
-      <button class="btn gold" onclick="openAuth()">⭐ إنشاء حساب مجاني</button>
+  <div class="stats">
+    <div class="stat">
+      👨‍🎓 <span class="muted">الطلاب</span>
+      <strong id="studentsCount">0</strong>
+    </div>
+    <div class="stat">
+      📚 <span class="muted">ملفات تعليمية</span>
+      <strong id="filesCount">0</strong>
+    </div>
+    <div class="stat">
+      🎮 <span class="muted">ألعاب</span>
+      <strong>10</strong>
+    </div>
+    <div class="stat">
+      ⭐ <span class="muted">XP الخاص بك</span>
+      <strong id="heroXP">0</strong>
     </div>
   </div>
-
-  <div class="globe">
-    <span>🌍</span>
-  </div>
-</div>
-</section>
-
-<section>
-<div class="container stats">
-  <div class="stat">
-    <div class="num" id="students">0</div>
-    <div class="label">👨‍🎓 طلاب مسجلون</div>
-  </div>
-  <div class="stat">
-    <div class="num" id="files">0</div>
-    <div class="label">📚 موارد تعليمية</div>
-  </div>
-  <div class="stat">
-    <div class="num" id="globalXP">0</div>
-    <div class="label">⭐ XP عالمي</div>
-  </div>
-  <div class="stat">
-    <div class="num" id="countries">195</div>
-    <div class="label">🌍 دول مستهدفة</div>
-  </div>
-</div>
-</section>
-
-<section id="features">
-<div class="container">
-<div class="sectionHead">
-<div>
-<h2>🚀 عالم الرياضيات</h2>
-<p>كل ما يحتاجه الطالب في مكان واحد.</p>
-</div>
-</div>
-
-<div class="grid">
-  <div class="card">
-    <div class="cardIcon">📚</div>
-    <h3>المكتبة العالمية</h3>
-    <p>دروس، ملخصات، تمارين، فروض، اختبارات وملفات PDF منظمة حسب المستوى والمادة.</p>
-    <button class="btn" onclick="go('library')">فتح المكتبة</button>
-  </div>
-
-  <div class="card">
-    <div class="cardIcon">🎮</div>
-    <h3>Math Games</h3>
-    <p>ألعاب رياضيات سريعة تمنحك XP وتساعدك على تطوير مهارات الحساب والمنطق.</p>
-    <button class="btn" onclick="go('games')">العب الآن</button>
-  </div>
-
-  <div class="card">
-    <div class="cardIcon">🏆</div>
-    <h3>Global Leaderboard</h3>
-    <p>تنافس مع الطلاب حول العالم وابنِ ترتيبك الحقيقي من خلال XP المكتسب.</p>
-    <button class="btn" onclick="go('leaderboard')">شاهد الترتيب</button>
-  </div>
-</div>
 </div>
 </section>
 
 <section id="library">
 <div class="container">
-<div class="sectionHead">
-<div>
-<h2>📚 المكتبة</h2>
-<p>محتوى قابل للتوسع إلى مناهج ودول متعددة.</p>
-</div>
-<button class="btn" onclick="showLibrary()">عرض الكل</button>
-</div>
+  <div class="section-title">
+    <div>
+      <h2>📚 المكتبة التعليمية</h2>
+      <p class="muted">تعلم، ابحث، وحل التمارين.</p>
+    </div>
+  </div>
 
-<div class="grid" id="libraryGrid"></div>
+  <div class="library-tools">
+    <input id="searchInput" placeholder="🔎 ابحث عن درس، تمرين، اختبار...">
+    <select id="levelFilter">
+      <option value="">كل المستويات</option>
+      <option>الأولى ثانوي</option>
+      <option>الثانية ثانوي</option>
+      <option>الثالثة ثانوي</option>
+      <option>BAC</option>
+      <option>University</option>
+    </select>
+    <select id="typeFilter">
+      <option value="">كل الأنواع</option>
+      <option>درس</option>
+      <option>تمرين</option>
+      <option>اختبار</option>
+      <option>ملخص</option>
+    </select>
+  </div>
+
+  <div class="grid" id="libraryGrid" style="margin-top:18px"></div>
 </div>
 </section>
 
 <section id="games">
 <div class="container">
-<div class="sectionHead">
-<div>
-<h2>🎮 ألعاب الرياضيات</h2>
-<p>العب، اجمع XP، وطور مستواك.</p>
-</div>
-</div>
+  <div class="section-title">
+    <div>
+      <h2>🎮 HAMOU MATH GAMES</h2>
+      <p class="muted">العب واربح XP.</p>
+    </div>
+  </div>
 
-<div class="grid" id="gamesGrid"></div>
+  <div class="grid" id="gamesGrid"></div>
 </div>
 </section>
 
 <section id="challenges">
 <div class="container">
-<div class="sectionHead">
-<div>
-<h2>⚔️ تحديات اليوم</h2>
-<p>حاول إكمال تحدياتك اليومية.</p>
-</div>
-</div>
-
-<div class="grid">
-  <div class="card">
-    <div class="cardIcon">🔥</div>
-    <h3>تحدي السرعة</h3>
-    <p>أجب عن 5 مسائل خلال دقيقة واحدة.</p>
-    <button class="btn primary" onclick="startGame('speed')">ابدأ +50 XP</button>
+  <div class="section-title">
+    <div>
+      <h2>⚔️ التحديات</h2>
+      <p class="muted">ارفع مستواك يومًا بعد يوم.</p>
+    </div>
   </div>
 
-  <div class="card">
-    <div class="cardIcon">🧠</div>
-    <h3>تحدي المنطق</h3>
-    <p>اختبر قدرتك على التفكير الرياضي.</p>
-    <button class="btn primary" onclick="startGame('logic')">ابدأ +75 XP</button>
-  </div>
+  <div class="grid">
 
-  <div class="card">
-    <div class="cardIcon">👑</div>
-    <h3>التحدي اليومي</h3>
-    <p>أكمل سؤال اليوم واحصل على مكافأة XP.</p>
-    <button class="btn gold" onclick="startGame('daily')">ابدأ +100 XP</button>
+    <div class="card challenge">
+      <h3>🔥 تحدي اليوم</h3>
+      <p>حل 5 مسائل رياضية.</p>
+      <strong class="xp">+100 XP</strong>
+      <br><br>
+      <button class="btn btn-primary" onclick="completeChallenge('daily',100)">
+        إنهاء التحدي
+      </button>
+    </div>
+
+    <div class="card challenge">
+      <h3>🏆 تحدي الأسبوع</h3>
+      <p>العب 10 جولات.</p>
+      <strong class="xp">+500 XP</strong>
+      <br><br>
+      <button class="btn btn-primary" onclick="completeChallenge('weekly',500)">
+        إنهاء التحدي
+      </button>
+    </div>
+
+    <div class="card challenge">
+      <h3>💎 تحدي النخبة</h3>
+      <p>حقق 1000 XP خلال الشهر.</p>
+      <strong class="xp">+1000 XP</strong>
+      <br><br>
+      <button class="btn btn-primary" onclick="completeChallenge('elite',1000)">
+        إنهاء التحدي
+      </button>
+    </div>
+
   </div>
-</div>
 </div>
 </section>
 
 <section id="leaderboard">
 <div class="container">
-<div class="sectionHead">
-<div>
-<h2>🏆 الترتيب العالمي</h2>
-<p>يتم ترتيب الحسابات حسب XP.</p>
-</div>
-<button class="btn" onclick="loadLeaderboard()">↻ تحديث</button>
-</div>
-
-<div class="card">
-<div id="leaderboardList">
-  <div class="leader">
-    <div class="rank">1</div>
-    <div class="avatar">H</div>
-    <div class="leaderInfo">
-      <b>HAMOU MATH</b><br>
-      <small>ابدأ لتظهر هنا</small>
+  <div class="section-title">
+    <div>
+      <h2>🏆 الترتيب العالمي</h2>
+      <p class="muted">أفضل الطلاب حسب XP.</p>
     </div>
-    <div class="xp">0 XP</div>
-  </div>
-</div>
-</div>
-</div>
-</section>
-
-<section id="profile">
-<div class="container">
-<div class="sectionHead">
-<div>
-<h2>👤 حسابي</h2>
-<p>تقدمك الشخصي.</p>
-</div>
-</div>
-
-<div class="profile">
-  <div class="card">
-    <div style="display:flex;gap:12px;align-items:center">
-      <div class="avatar" id="profileAvatar">?</div>
-      <div>
-        <h3 id="profileName">زائر</h3>
-        <small id="profileCountry">غير مسجل</small>
-      </div>
-    </div>
-
-    <div style="margin-top:20px">
-      <b id="levelText">المستوى 1</b>
-      <div class="progress"><span id="progressBar"></span></div>
-      <small id="progressText">0 / 100 XP</small>
-    </div>
-
-    <button class="btn primary" style="margin-top:15px" onclick="openAuth()">تسجيل / دخول</button>
+    <button class="btn btn-outline" onclick="loadLeaderboard()">تحديث</button>
   </div>
 
-  <div class="card">
-    <div class="miniStats">
-      <div class="mini"><b id="myXP">0</b><small>XP</small></div>
-      <div class="mini"><b id="myGames">0</b><small>ألعاب</small></div>
-      <div class="mini"><b id="myWins">0</b><small>انتصارات</small></div>
-    </div>
+  <div class="card table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>الطالب</th>
+          <th>المستوى</th>
+          <th>XP</th>
+        </tr>
+      </thead>
+      <tbody id="leaderboardBody">
+        <tr><td colspan="4" class="center">جار التحميل...</td></tr>
+      </tbody>
+    </table>
   </div>
-</div>
 </div>
 </section>
 
 <section id="premium">
 <div class="container">
-<div class="card" style="text-align:center;padding:35px">
-  <div style="font-size:45px">💎</div>
-  <h2>HAMOU MATH PREMIUM</h2>
-  <p>
-    محتوى متقدم، تحديات خاصة، تحليلات وتطويرات مستقبلية للطلاب.
-  </p>
-  <div style="font-size:30px;font-weight:900;margin:15px">499 دج / شهر</div>
-  <button class="btn gold" onclick="premiumAlert()">⭐ اكتشف Premium</button>
+  <div class="section-title">
+    <div>
+      <h2>💎 HAMOU MATH Premium</h2>
+      <p class="muted">محتوى متقدم وتجربة أكثر قوة.</p>
+    </div>
+  </div>
+
+  <div class="grid">
+    <div class="card">
+      <h3>Premium Monthly</h3>
+      <h2>499 DZD <small>/ شهر</small></h2>
+      <p>✔ ملفات Premium<br>✔ محتوى حصري<br>✔ إحصائيات متقدمة<br>✔ شارات خاصة</p>
+      <button class="btn btn-primary" onclick="premiumInfo()">اشترك الآن</button>
+    </div>
+
+    <div class="card">
+      <h3>Premium Yearly</h3>
+      <h2>4990 DZD <small>/ سنة</small></h2>
+      <p>✔ كل مزايا Premium<br>✔ سعر أفضل<br>✔ محتوى حصري<br>✔ أولوية في التحديات</p>
+      <button class="btn btn-primary" onclick="premiumInfo()">اشترك الآن</button>
+    </div>
+
+    <div class="card">
+      <h3>🌍 مستقبل HAMOU MATH</h3>
+      <p>
+        النظام مصمم لاحقًا لدعم وسائل دفع دولية
+        وخدمات دفع محلية، مع عدم تخزين بيانات البطاقات داخل الموقع.
+      </p>
+    </div>
+  </div>
 </div>
+</section>
+
+<section id="account">
+<div class="container">
+  <div class="section-title">
+    <div>
+      <h2>👤 حسابي</h2>
+      <p class="muted">إحصائيات تقدمك في HAMOU MATH.</p>
+    </div>
+  </div>
+
+  <div id="loggedOutAccount" class="card center">
+    <h3>أنت تتصفح كزائر</h3>
+    <p>أنشئ حسابًا مجانيًا لحفظ XP والنتائج والترتيب.</p>
+    <button class="btn btn-primary" onclick="openAuth('signup')">إنشاء حساب</button>
+  </div>
+
+  <div id="loggedAccount" class="profile hidden">
+
+    <div class="card">
+      <div class="profile-main">
+        <div class="avatar" id="avatar">H</div>
+        <div>
+          <h2 id="profileName">طالب HAMOU</h2>
+          <p class="muted" id="profileEmail"></p>
+          <strong>المستوى <span id="profileLevel">1</span></strong>
+        </div>
+      </div>
+
+      <hr style="border:0;border-top:1px solid var(--border);margin:20px 0">
+
+      <div>
+        <strong><span id="profileXP">0</span> XP</strong>
+        <div class="progress">
+          <span id="levelProgress"></span>
+        </div>
+        <small class="muted" id="nextLevelText"></small>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>📊 إحصائياتي</h3>
+      <p>⭐ XP: <strong id="statXP">0</strong></p>
+      <p>🏆 المستوى: <strong id="statLevel">1</strong></p>
+      <p>🎮 الألعاب: <strong id="statGames">0</strong></p>
+      <p>🎯 التحديات: <strong id="statChallenges">0</strong></p>
+
+      <button class="btn btn-danger" onclick="logout()">تسجيل الخروج</button>
+    </div>
+
+  </div>
 </div>
 </section>
 
 </main>
 
 <footer>
-<div class="container footerGrid">
+<div class="container footer-grid">
   <div>
-    <h3>∑ HAMOU MATH GLOBAL</h3>
-    <p>تعلم الرياضيات. العب. نافس. تطور. 🌍</p>
+    <h3>HAMOU MATH 🌍</h3>
+    <p>سلسلة حمو في الرياضيات — مفتاح التفوق.</p>
+    <p>منصة تعليمية حديثة للرياضيات.</p>
   </div>
   <div>
-    <h3>روابط</h3>
-    <div class="social">
-      <button class="btn" onclick="go('home')">الرئيسية</button>
-      <button class="btn" onclick="go('games')">الألعاب</button>
-      <button class="btn" onclick="go('library')">المكتبة</button>
-      <button class="btn" onclick="go('leaderboard')">الترتيب</button>
-    </div>
+    <h3>المنصة</h3>
+    <p>📚 المكتبة</p>
+    <p>🎮 الألعاب</p>
+    <p>🏆 الترتيب</p>
+  </div>
+  <div>
+    <h3>الحساب</h3>
+    <p>🔐 تسجيل الدخول</p>
+    <p>👤 الملف الشخصي</p>
+    <p>💎 Premium</p>
   </div>
 </div>
 </footer>
 
-<div class="toast" id="toast"></div>
-
 <!-- AUTH MODAL -->
 <div class="modal" id="authModal">
-<div class="modalBox">
-<div class="modalTop">
-<h2 id="authTitle">تسجيل الدخول</h2>
-<button class="close" onclick="closeModal('authModal')">×</button>
-</div>
+<div class="modal-box">
 
-<div class="field">
-<label>البريد الإلكتروني</label>
-<input id="email" type="email" placeholder="name@example.com">
-</div>
+  <div class="modal-head">
+    <h2 id="authTitle">تسجيل الدخول</h2>
+    <button class="close" onclick="closeAuth()">×</button>
+  </div>
 
-<div class="field">
-<label>كلمة المرور</label>
-<input id="password" type="password" placeholder="••••••••">
-</div>
+  <div id="authNotice" class="notice"></div>
 
-<div id="signupFields" style="display:none">
-<div class="field">
-<label>الاسم</label>
-<input id="name" type="text" placeholder="اسمك">
-</div>
+  <div id="nameGroup" class="form-group hidden">
+    <label>الاسم</label>
+    <input id="authName" placeholder="مثال: محمد أمين">
+  </div>
 
-<div class="field">
-<label>الدولة</label>
-<select id="country">
-<option value="DZ">🇩🇿 الجزائر</option>
-<option value="FR">🇫🇷 France</option>
-<option value="MA">🇲🇦 المغرب</option>
-<option value="TN">🇹🇳 تونس</option>
-<option value="EG">🇪🇬 مصر</option>
-<option value="SA">🇸🇦 السعودية</option>
-<option value="AE">🇦🇪 الإمارات</option>
-<option value="US">🇺🇸 USA</option>
-<option value="GB">🇬🇧 UK</option>
-<option value="DE">🇩🇪 Germany</option>
-<option value="CA">🇨🇦 Canada</option>
-<option value="TR">🇹🇷 Türkiye</option>
-<option value="OTHER">🌍 Other</option>
-</select>
-</div>
-</div>
+  <div class="form-group">
+    <label>البريد الإلكتروني</label>
+    <input id="authEmail" type="email" placeholder="example@email.com">
+  </div>
 
-<div class="formActions">
-<button class="btn primary" id="authSubmit" onclick="submitAuth()">دخول</button>
-<button class="btn" onclick="toggleAuthMode()" id="authSwitch">إنشاء حساب</button>
-</div>
+  <div class="form-group">
+    <label>كلمة المرور</label>
+    <input id="authPassword" type="password" placeholder="6 أحرف على الأقل">
+  </div>
 
-<button class="btn" style="width:100%;margin-top:10px" onclick="resetPassword()">نسيت كلمة المرور؟</button>
-</div>
-</div>
+  <button class="btn btn-primary" style="width:100%" id="authSubmit">
+    تسجيل الدخول
+  </button>
 
-<!-- QUIZ MODAL -->
-<div class="modal" id="quizModal">
-<div class="modalBox">
-<div class="modalTop">
-<h2 id="gameTitle">Math Challenge</h2>
-<button class="close" onclick="closeModal('quizModal')">×</button>
-</div>
+  <div class="center" style="margin-top:15px">
+    <button class="btn btn-outline" id="switchAuth">
+      إنشاء حساب جديد
+    </button>
+  </div>
 
-<div class="timer">⏱️ <span id="timer">20</span></div>
-<div class="quizQuestion" id="question">...</div>
-<div class="answers" id="answers"></div>
 </div>
 </div>
 
 <script>
 /* =========================================================
-   HAMOU MATH GLOBAL
-   Supabase configuration
+   HAMOU MATH V23
+   Supabase Configuration
 ========================================================= */
 
-const SUPABASE_URL = "https://ifurlsucekmaynuhsfva.supabase.co";
-const SUPABASE_KEY = "sb_publishable_WRvn0kt8kJ3SSy2WG1ca4w_dzZQBrBU";
+const SUPABASE_URL =
+  "https://ifurlsucekmaynuhsfva.supabase.co";
 
-let supabaseClient = null;
+const SUPABASE_KEY =
+  "sb_publishable_WRvn0kt8kJ3SSy2WG1ca4w_dzZQBrBU";
 
-try{
-  supabaseClient = window.supabase.createClient(
-    SUPABASE_URL,
-    SUPABASE_KEY,
-    {
-      auth:{
-        persistSession:true,
-        autoRefreshToken:true,
-        detectSessionInUrl:true
-      }
-    }
-  );
-}catch(e){
-  console.warn("Supabase unavailable",e);
-}
+const { createClient } = supabase;
 
-/* =========================================================
-   LOCAL STATE
-========================================================= */
+const db = createClient(SUPABASE_URL, SUPABASE_KEY);
 
-const defaultState = {
-  xp:0,
-  games:0,
-  wins:0,
-  level:1,
-  name:"زائر",
-  country:"DZ"
-};
-
-let state = JSON.parse(localStorage.getItem("hamoumath_state") || "null") || {...defaultState};
 let currentUser = null;
-let signupMode = false;
-let currentGame = null;
-let currentQuestion = null;
-let timerInterval = null;
+let profile = null;
+let authMode = "login";
 
 /* =========================================================
-   DATA
+   NAVIGATION
 ========================================================= */
-
-const library = [
-  ["📘","الرياضيات - ثانوي","دروس وملخصات الرياضيات لجميع مستويات التعليم الثانوي."],
-  ["📝","تمارين محلولة","مجموعة تمارين للتدرب وفهم الأفكار الأساسية."],
-  ["📑","فروض واختبارات","نماذج تدريبية للفروض والاختبارات."],
-  ["🎓","BAC","تحضير مكثف للبكالوريا مع تمارين وتحديات."],
-  ["📐","الهندسة","الهندسة، المتجهات، التحويلات والمفاهيم الأساسية."],
-  ["∫","التحليل","الدوال، النهايات، الاشتقاق والتكامل."],
-  ["🎲","الاحتمالات","مفاهيم وتمارين الاحتمالات والإحصاء."],
-  ["∞","المتتاليات","دروس وتمارين المتتاليات العددية."],
-  ["🌍","International Math","محتوى قابل للتوسع للمناهج الدولية."]
-];
-
-const games = [
-  ["⚡","Speed Math","احسب بأسرع ما تستطيع.","speed"],
-  ["🧠","Logic Master","أسئلة منطقية رياضية.","logic"],
-  ["➕","Quick Calculation","عمليات حسابية سريعة.","calc"],
-  ["🎯","Number Hunter","اكتشف الرقم الصحيح.","number"],
-  ["📐","Geometry Challenge","اختبر معلوماتك الهندسية.","geometry"],
-  ["🔢","Sequence Master","أكمل المتتالية.","sequence"],
-  ["📊","Statistics Pro","أسئلة في الإحصاء.","statistics"],
-  ["∑","Algebra Arena","تحديات جبرية.","algebra"],
-  ["√","Root Challenge","الجذور والقوى.","roots"],
-  ["🏆","Daily Champion","التحدي اليومي.","daily"]
-];
-
-/* =========================================================
-   UI
-========================================================= */
-
-function $(id){return document.getElementById(id)}
 
 function go(id){
-  const el=$(id);
-  if(el) el.scrollIntoView({behavior:"smooth"});
+  document.getElementById(id)?.scrollIntoView({
+    behavior:"smooth",
+    block:"start"
+  });
+  document.getElementById("navlinks").classList.remove("open");
 }
 
-function toast(msg){
-  const t=$("toast");
-  t.textContent=msg;
-  t.classList.add("show");
-  clearTimeout(window.toastTimer);
-  window.toastTimer=setTimeout(()=>t.classList.remove("show"),2600);
+document.getElementById("menuBtn").onclick=()=>{
+  document.getElementById("navlinks").classList.toggle("open");
+};
+
+/* =========================================================
+   AUTH MODAL
+========================================================= */
+
+function openAuth(mode="login"){
+  authMode=mode;
+
+  const modal=document.getElementById("authModal");
+  const title=document.getElementById("authTitle");
+  const nameGroup=document.getElementById("nameGroup");
+  const submit=document.getElementById("authSubmit");
+  const switchBtn=document.getElementById("switchAuth");
+
+  clearNotice();
+
+  if(mode==="signup"){
+    title.textContent="إنشاء حساب جديد";
+    nameGroup.classList.remove("hidden");
+    submit.textContent="إنشاء الحساب";
+    switchBtn.textContent="لدي حساب بالفعل";
+  }else{
+    title.textContent="تسجيل الدخول";
+    nameGroup.classList.add("hidden");
+    submit.textContent="تسجيل الدخول";
+    switchBtn.textContent="إنشاء حساب جديد";
+  }
+
+  modal.classList.add("show");
 }
 
-function closeModal(id){
-  $(id).classList.remove("show");
-  if(timerInterval) clearInterval(timerInterval);
+function closeAuth(){
+  document.getElementById("authModal").classList.remove("show");
 }
 
-function openModal(id){
-  $(id).classList.add("show");
-}
+document.getElementById("accountBtn").onclick=()=>{
+  if(currentUser) go("account");
+  else openAuth("login");
+};
 
-function saveState(){
-  localStorage.setItem("hamoumath_state",JSON.stringify(state));
-  updateProfile();
+document.getElementById("switchAuth").onclick=()=>{
+  openAuth(authMode==="login"?"signup":"login");
+};
+
+document.getElementById("authSubmit").onclick=handleAuth;
+
+async function handleAuth(){
+
+  const email=document.getElementById("authEmail").value.trim();
+  const password=document.getElementById("authPassword").value;
+  const name=document.getElementById("authName").value.trim();
+
+  clearNotice();
+
+  if(!email || !password){
+    showNotice("أدخل البريد الإلكتروني وكلمة المرور.","error");
+    return;
+  }
+
+  if(password.length<6){
+    showNotice("كلمة المرور يجب أن تحتوي على 6 أحرف على الأقل.","error");
+    return;
+  }
+
+  const btn=document.getElementById("authSubmit");
+  btn.disabled=true;
+  btn.textContent="جار المعالجة...";
+
+  try{
+
+    if(authMode==="signup"){
+
+      const {data,error}=await db.auth.signUp({
+        email,
+        password,
+        options:{
+          data:{
+            full_name:name || "طالب HAMOU"
+          }
+        }
+      });
+
+      if(error) throw error;
+
+      if(data.user){
+
+        /*
+          إنشاء الملف الشخصي.
+          إذا كان جدول profiles موجودًا وسياساته صحيحة،
+          سيتم الحفظ مباشرة.
+        */
+
+        await createProfile(
+          data.user,
+          name || "طالب HAMOU"
+        );
+
+        showNotice(
+          "تم إنشاء الحساب بنجاح. إذا طلب منك تأكيد البريد، افتح بريدك الإلكتروني ثم سجل الدخول.",
+          "success"
+        );
+
+        setTimeout(closeAuth,1800);
+      }
+
+    }else{
+
+      const {error}=await db.auth.signInWithPassword({
+        email,
+        password
+      });
+
+      if(error) throw error;
+
+      showNotice("تم تسجيل الدخول بنجاح.","success");
+
+      setTimeout(closeAuth,700);
+    }
+
+  }catch(err){
+
+    console.error(err);
+
+    let message=err.message || "حدث خطأ غير متوقع.";
+
+    if(message.toLowerCase().includes("invalid login credentials")){
+      message="البريد الإلكتروني أو كلمة المرور غير صحيحة.";
+    }
+
+    if(message.toLowerCase().includes("email not confirmed")){
+      message="يجب تأكيد بريدك الإلكتروني أولًا.";
+    }
+
+    showNotice(message,"error");
+
+  }finally{
+    btn.disabled=false;
+    btn.textContent=
+      authMode==="signup" ? "إنشاء الحساب" : "تسجيل الدخول";
+  }
 }
 
 /* =========================================================
-   LIBRARY
+   PROFILE
 ========================================================= */
 
-function renderLibrary(){
-  $("libraryGrid").innerHTML=library.map(x=>`
-    <div class="card">
-      <div class="cardIcon">${x[0]}</div>
-      <h3>${x[1]}</h3>
-      <p>${x[2]}</p>
-      <button class="btn" onclick="resource('${x[1]}')">فتح</button>
-    </div>
-  `).join("");
+async function createProfile(user,name){
+
+  const {error}=await db
+    .from("profiles")
+    .upsert({
+      id:user.id,
+      full_name:name,
+      xp:0,
+      level:1,
+      games_played:0,
+      challenges_completed:0
+    },{
+      onConflict:"id"
+    });
+
+  if(error){
+    console.warn("Profile creation:",error.message);
+  }
 }
 
-function resource(name){
-  toast("📚 قسم "+name+" جاهز لإضافة ملفات PDF من Supabase.");
+async function loadProfile(){
+
+  if(!currentUser) return;
+
+  const {data,error}=await db
+    .from("profiles")
+    .select("*")
+    .eq("id",currentUser.id)
+    .maybeSingle();
+
+  if(error){
+    console.warn("Profile load:",error.message);
+    profile={
+      id:currentUser.id,
+      full_name:currentUser.user_metadata?.full_name || "طالب HAMOU",
+      xp:0,
+      level:1,
+      games_played:0,
+      challenges_completed:0
+    };
+  }else if(!data){
+
+    profile={
+      id:currentUser.id,
+      full_name:currentUser.user_metadata?.full_name || "طالب HAMOU",
+      xp:0,
+      level:1,
+      games_played:0,
+      challenges_completed:0
+    };
+
+    await createProfile(
+      currentUser,
+      profile.full_name
+    );
+
+  }else{
+    profile=data;
+  }
+
+  updateUI();
+}
+
+/* =========================================================
+   XP SYSTEM
+========================================================= */
+
+function calculateLevel(xp){
+
+  if(xp<100) return 1;
+  if(xp<300) return 2;
+  if(xp<600) return 3;
+  if(xp<1000) return 4;
+  if(xp<1500) return 5;
+  if(xp<2200) return 6;
+  if(xp<3000) return 7;
+  if(xp<4000) return 8;
+  if(xp<5500) return 9;
+
+  return Math.floor(xp/500)+1;
+}
+
+async function addXP(amount,reason="activity"){
+
+  if(!currentUser){
+    openAuth("signup");
+    showNotice("أنشئ حسابًا لحفظ XP الخاص بك.","error");
+    return false;
+  }
+
+  if(!profile) await loadProfile();
+
+  const oldXP=Number(profile.xp||0);
+  const newXP=oldXP+Number(amount);
+  const newLevel=calculateLevel(newXP);
+
+  const {error}=await db
+    .from("profiles")
+    .update({
+      xp:newXP,
+      level:newLevel
+    })
+    .eq("id",currentUser.id);
+
+  if(error){
+    console.error(error);
+    alert("تعذر حفظ XP. تأكد من إعداد جدول profiles في Supabase.");
+    return false;
+  }
+
+  profile.xp=newXP;
+  profile.level=newLevel;
+
+  updateUI();
+
+  if(newLevel>calculateLevel(oldXP)){
+    alert("🎉 مبروك! وصلت إلى المستوى "+newLevel);
+  }
+
+  return true;
 }
 
 /* =========================================================
    GAMES
 ========================================================= */
 
+const games=[
+  ["➕","سباق الجمع","اجمع الأعداد بأسرع وقت.",20],
+  ["➖","تحدي الطرح","اختبر سرعة حسابك.",20],
+  ["✖️","ملك الضرب","هل تستطيع الفوز؟",25],
+  ["➗","خبير القسمة","أوجد الناتج الصحيح.",25],
+  ["√","تحدي الجذور","اختبر مهاراتك.",30],
+  ["π","عالم π","أسئلة حول π.",30],
+  ["∞","نهاية أم لا؟","تحديات تحليلية.",35],
+  ["📐","الهندسة","حل مسائل هندسية.",30],
+  ["📊","الإحصاء","حل مسائل إحصائية.",35],
+  ["🧠","Math Master","التحدي النهائي.",50]
+];
+
 function renderGames(){
-  $("gamesGrid").innerHTML=games.map(x=>`
+
+  const grid=document.getElementById("gamesGrid");
+
+  grid.innerHTML=games.map((g,i)=>`
     <div class="card game">
-      <span class="tag">+XP</span>
-      <div class="cardIcon">${x[0]}</div>
-      <h3>${x[1]}</h3>
-      <p>${x[2]}</p>
-      <button class="btn primary" onclick="startGame('${x[3]}')">ابدأ اللعبة</button>
+      <div class="game-icon">${g[0]}</div>
+      <h3>${g[1]}</h3>
+      <p>${g[2]}</p>
+      <strong class="xp">+${g[3]} XP</strong>
+      <br>
+      <button class="btn btn-primary"
+        onclick="playGame(${i})">
+        العب الآن
+      </button>
     </div>
   `).join("");
 }
 
-function showLibrary(){
-  go("library");
-  toast("📚 جميع أقسام المكتبة متاحة.");
-}
+async function playGame(index){
 
-/* =========================================================
-   MATH ENGINE
-========================================================= */
+  const game=games[index];
 
-function rand(min,max){
-  return Math.floor(Math.random()*(max-min+1))+min;
-}
-
-function generateQuestion(type){
-  let a,b,correct,question,answers;
-
-  if(type==="speed" || type==="calc"){
-    a=rand(2,30); b=rand(2,20);
-    const op=rand(0,2);
-
-    if(op===0){
-      correct=a+b;
-      question=`${a} + ${b} = ؟`;
-    }else if(op===1){
-      if(a<b)[a,b]=[b,a];
-      correct=a-b;
-      question=`${a} − ${b} = ؟`;
-    }else{
-      a=rand(2,12);b=rand(2,12);
-      correct=a*b;
-      question=`${a} × ${b} = ؟`;
-    }
-  }
-
-  else if(type==="logic"){
-    a=rand(2,10);
-    correct=a*2+1;
-    question=`إذا كان النمط: ${a}, ${a*2-1}, ${a*2+1} ... اختر العدد التالي`;
-    correct=a*2+3;
-  }
-
-  else if(type==="sequence"){
-    a=rand(2,10);
-    const d=rand(2,7);
-    correct=a+d*3;
-    question=`${a} ، ${a+d} ، ${a+d*2} ، ؟`;
-  }
-
-  else if(type==="number"){
-    a=rand(10,50);
-    correct=a*a;
-    question=`ما مربع العدد ${a} ؟`;
-  }
-
-  else if(type==="roots"){
-    a=rand(2,12);
-    correct=a;
-    question=`√${a*a} = ؟`;
-  }
-
-  else if(type==="algebra"){
-    a=rand(2,10);
-    b=rand(2,15);
-    correct=a;
-    question=`إذا كان x + ${b} = ${a+b}، فما قيمة x؟`;
-  }
-
-  else if(type==="geometry"){
-    a=rand(2,10);
-    correct=a*4;
-    question=`مربع طول ضلعه ${a}. ما محيطه؟`;
-  }
-
-  else if(type==="statistics"){
-    a=rand(2,10);
-    correct=a;
-    question=`ما متوسط الأعداد: ${a-2} ، ${a} ، ${a+2} ؟`;
-  }
-
-  else{
-    a=rand(2,15);
-    b=rand(2,15);
-    correct=a+b;
-    question=`${a} + ${b} = ؟`;
-  }
-
-  answers=new Set([correct]);
-  while(answers.size<4){
-    const delta=rand(-10,10);
-    if(delta!==0) answers.add(correct+delta);
-  }
-
-  return {
-    question,
-    correct,
-    answers:[...answers].sort(()=>Math.random()-.5)
-  };
-}
-
-/* =========================================================
-   GAME
-========================================================= */
-
-function startGame(type){
   if(!currentUser){
-    toast("👤 سجل دخولك لحفظ XP والنتائج.");
-    openAuth();
+    openAuth("signup");
     return;
   }
 
-  currentGame={
-    type,
-    score:0,
-    count:0,
-    total:5,
-    xp: type==="daily" ? 100 : 50
-  };
-
-  $("gameTitle").textContent="🎮 Math Challenge";
-  openModal("quizModal");
-  nextQuestion();
-}
-
-function nextQuestion(){
-  if(currentGame.count>=currentGame.total){
-    finishGame();
-    return;
-  }
-
-  currentQuestion=generateQuestion(currentGame.type);
-  currentGame.count++;
-
-  $("question").textContent=currentQuestion.question;
-  $("answers").innerHTML=currentQuestion.answers.map(a=>`
-    <button class="answer" onclick="answer(${a})">${a}</button>
-  `).join("");
-
-  let seconds=20;
-  $("timer").textContent=seconds;
-  clearInterval(timerInterval);
-
-  timerInterval=setInterval(()=>{
-    seconds--;
-    $("timer").textContent=seconds;
-
-    if(seconds<=0){
-      clearInterval(timerInterval);
-      nextQuestion();
-    }
-  },1000);
-}
-
-function answer(value){
-  clearInterval(timerInterval);
-
-  if(value===currentQuestion.correct){
-    currentGame.score++;
-    toast("✅ إجابة صحيحة!");
-  }else{
-    toast("❌ حاول مرة أخرى.");
-  }
-
-  setTimeout(nextQuestion,250);
-}
-
-async function finishGame(){
-  clearInterval(timerInterval);
-
-  const score=currentGame.score;
-  const earned=Math.max(
-    10,
-    Math.round(currentGame.xp*(score/currentGame.total))
+  const answer=prompt(
+    game[1]+"\n\nمثال: اكتب أي إجابة لتجربة اللعبة."
   );
 
-  state.xp+=earned;
-  state.games++;
-  if(score>=Math.ceil(currentGame.total*.6)) state.wins++;
+  if(answer===null) return;
 
-  state.level=Math.floor(state.xp/100)+1;
-  saveState();
+  const ok=await addXP(game[3],"game");
 
-  await saveProgress(earned,score);
+  if(ok){
 
-  closeModal("quizModal");
+    profile.games_played=
+      Number(profile.games_played||0)+1;
 
-  toast(`🏆 انتهت اللعبة! +${earned} XP`);
+    await db
+      .from("profiles")
+      .update({
+        games_played:profile.games_played
+      })
+      .eq("id",currentUser.id);
 
-  loadLeaderboard();
+    updateUI();
+
+    alert(
+      "🎉 أحسنت!\n\n+"+
+      game[3]+
+      " XP\n\nواصل اللعب لتصل إلى القمة!"
+    );
+  }
 }
 
 /* =========================================================
-   AUTH
+   CHALLENGES
 ========================================================= */
 
-function openAuth(){
-  if(currentUser){
-    if(confirm("هل تريد تسجيل الخروج؟")){
-      signOut();
-    }
+async function completeChallenge(type,xp){
+
+  if(!currentUser){
+    openAuth("signup");
     return;
   }
 
-  signupMode=false;
-  updateAuthUI();
-  openModal("authModal");
-}
+  const key="hamou_challenge_"+type;
+  const today=new Date().toISOString().slice(0,10);
 
-function toggleAuthMode(){
-  signupMode=!signupMode;
-  updateAuthUI();
-}
-
-function updateAuthUI(){
-  $("authTitle").textContent=signupMode?"إنشاء حساب":"تسجيل الدخول";
-  $("authSubmit").textContent=signupMode?"إنشاء الحساب":"دخول";
-  $("authSwitch").textContent=signupMode?"لدي حساب":"إنشاء حساب";
-  $("signupFields").style.display=signupMode?"block":"none";
-}
-
-async function submitAuth(){
-
-  const email=$("email").value.trim();
-  const password=$("password").value;
-
-  if(!email || !password){
-    toast("⚠️ أدخل البريد وكلمة المرور.");
+  if(localStorage.getItem(key)===today){
+    alert("لقد أكملت هذا التحدي بالفعل اليوم.");
     return;
   }
 
-  if(!supabaseClient){
-    toast("⚠️ Supabase غير متاح.");
-    return;
-  }
+  const ok=await addXP(xp,"challenge");
 
-  if(signupMode){
+  if(!ok) return;
 
-    const name=$("name").value.trim() || "Student";
-    const country=$("country").value;
+  localStorage.setItem(key,today);
 
-    const {data,error}=await supabaseClient.auth.signUp({
-      email,
-      password,
-      options:{
-        data:{
-          full_name:name,
-          country:country
-        }
-      }
-    });
+  profile.challenges_completed=
+    Number(profile.challenges_completed||0)+1;
 
-    if(error){
-      toast("❌ "+error.message);
-      return;
-    }
+  await db
+    .from("profiles")
+    .update({
+      challenges_completed:profile.challenges_completed
+    })
+    .eq("id",currentUser.id);
 
-    if(data.user){
-      state.name=name;
-      state.country=country;
-      saveState();
-    }
+  updateUI();
 
-    toast("✅ تم إنشاء الحساب. تحقق من بريدك إذا طلب منك ذلك.");
-    closeModal("authModal");
-
-  }else{
-
-    const {data,error}=await supabaseClient.auth.signInWithPassword({
-      email,
-      password
-    });
-
-    if(error){
-      toast("❌ "+error.message);
-      return;
-    }
-
-    currentUser=data.user;
-    await loadUserProfile();
-
-    closeModal("authModal");
-    toast("👋 مرحبًا "+state.name);
-  }
-
-  updateAccountButton();
-}
-
-async function resetPassword(){
-
-  const email=$("email").value.trim();
-
-  if(!email){
-    toast("أدخل بريدك الإلكتروني أولًا.");
-    return;
-  }
-
-  const {error}=await supabaseClient.auth.resetPasswordForEmail(email,{
-    redirectTo:window.location.origin
-  });
-
-  if(error) toast("❌ "+error.message);
-  else toast("📩 تم إرسال رابط استعادة كلمة المرور.");
-}
-
-async function signOut(){
-
-  if(supabaseClient){
-    await supabaseClient.auth.signOut();
-  }
-
-  currentUser=null;
-  state={...defaultState};
-  saveState();
-  updateAccountButton();
-  toast("تم تسجيل الخروج.");
-}
-
-function updateAccountButton(){
-  $("accountBtn").textContent=currentUser
-    ? "👤 "+(state.name||"حسابي")
-    : "دخول";
-}
-
-/* =========================================================
-   PROFILE / SUPABASE
-========================================================= */
-
-async function loadUserProfile(){
-
-  if(!currentUser) return;
-
-  const id=currentUser.id;
-
-  try{
-
-    const {data,error}=await supabaseClient
-      .from("profiles")
-      .select("*")
-      .eq("id",id)
-      .maybeSingle();
-
-    if(!error && data){
-
-      state.name=data.full_name || state.name;
-      state.country=data.country || state.country;
-      state.xp=Number(data.xp||0);
-      state.games=Number(data.games||0);
-      state.wins=Number(data.wins||0);
-      state.level=Math.floor(state.xp/100)+1;
-
-      saveState();
-    }
-
-  }catch(e){
-    console.warn(e);
-  }
-
-  updateProfile();
-}
-
-async function saveProgress(earned,score){
-
-  if(!currentUser || !supabaseClient) return;
-
-  try{
-
-    const nextXP=Number(state.xp);
-
-    await supabaseClient
-      .from("profiles")
-      .upsert({
-        id:currentUser.id,
-        full_name:state.name,
-        country:state.country,
-        xp:nextXP,
-        games:state.games,
-        wins:state.wins,
-        updated_at:new Date().toISOString()
-      });
-
-    await supabaseClient
-      .from("game_results")
-      .insert({
-        user_id:currentUser.id,
-        score:score,
-        xp:earned,
-        game:currentGame.type
-      });
-
-  }catch(e){
-    console.warn("Progress save:",e);
-  }
-}
-
-function updateProfile(){
-
-  $("profileName").textContent=state.name||"زائر";
-
-  const countryNames={
-    DZ:"🇩🇿 الجزائر",
-    FR:"🇫🇷 France",
-    MA:"🇲🇦 المغرب",
-    TN:"🇹🇳 تونس",
-    EG:"🇪🇬 مصر",
-    SA:"🇸🇦 السعودية",
-    AE:"🇦🇪 الإمارات",
-    US:"🇺🇸 USA",
-    GB:"🇬🇧 UK",
-    DE:"🇩🇪 Germany",
-    CA:"🇨🇦 Canada",
-    TR:"🇹🇷 Türkiye",
-    OTHER:"🌍 Other"
-  };
-
-  $("profileCountry").textContent=countryNames[state.country]||"🌍";
-  $("profileAvatar").textContent=(state.name||"?").charAt(0).toUpperCase();
-
-  const level=Math.floor(state.xp/100)+1;
-  const currentLevelXP=state.xp%100;
-
-  $("levelText").textContent="المستوى "+level;
-  $("progressBar").style.width=currentLevelXP+"%";
-  $("progressText").textContent=`${currentLevelXP} / 100 XP`;
-
-  $("myXP").textContent=state.xp;
-  $("myGames").textContent=state.games;
-  $("myWins").textContent=state.wins;
+  alert("🏆 تم إكمال التحدي!\n+"+xp+" XP");
 }
 
 /* =========================================================
@@ -1307,72 +1118,299 @@ function updateProfile(){
 
 async function loadLeaderboard(){
 
-  const box=$("leaderboardList");
+  const body=document.getElementById("leaderboardBody");
 
-  if(!supabaseClient){
-    box.innerHTML=`
-      <div class="leader">
-        <div class="rank">—</div>
-        <div class="avatar">🌍</div>
-        <div class="leaderInfo">
-          <b>HAMOU MATH GLOBAL</b>
-          <small>سجل حسابك لتدخل الترتيب</small>
-        </div>
-        <div class="xp">0 XP</div>
+  body.innerHTML=
+    `<tr><td colspan="4" class="center">جار التحميل...</td></tr>`;
+
+  const {data,error}=await db
+    .from("profiles")
+    .select("full_name,level,xp")
+    .order("xp",{ascending:false})
+    .limit(100);
+
+  if(error){
+
+    console.error(error);
+
+    body.innerHTML=
+      `<tr>
+        <td colspan="4" class="center">
+          تعذر تحميل الترتيب. تأكد من إعداد Supabase.
+        </td>
+      </tr>`;
+
+    return;
+  }
+
+  if(!data || data.length===0){
+
+    body.innerHTML=
+      `<tr>
+        <td colspan="4" class="center">
+          لا توجد نتائج بعد. كن أول بطل!
+        </td>
+      </tr>`;
+
+    return;
+  }
+
+  body.innerHTML=data.map((p,i)=>`
+    <tr>
+      <td class="rank">
+        ${i===0?"🥇":i===1?"🥈":i===2?"🥉":i+1}
+      </td>
+      <td>${escapeHTML(p.full_name || "طالب HAMOU")}</td>
+      <td>${p.level || calculateLevel(p.xp||0)}</td>
+      <td><strong>${p.xp||0}</strong></td>
+    </tr>
+  `).join("");
+}
+
+/* =========================================================
+   LIBRARY
+========================================================= */
+
+const library=[
+  ["📘","الدوال العددية","الثالثة ثانوي","درس"],
+  ["📗","النهايات والاستمرارية","الثالثة ثانوي","درس"],
+  ["📙","الاشتقاقية","الثالثة ثانوي","درس"],
+  ["📕","التكامل","الثالثة ثانوي","درس"],
+  ["📝","تمارين البكالوريا","BAC","تمرين"],
+  ["📄","اختبارات الفصل الأول","الأولى ثانوي","اختبار"],
+  ["📚","الأعداد الحقيقية","الأولى ثانوي","ملخص"],
+  ["📐","الهندسة في الفضاء","الثانية ثانوي","درس"],
+  ["📊","الاحتمالات","University","درس"]
+];
+
+function renderLibrary(){
+
+  const q=document.getElementById("searchInput").value
+    .trim().toLowerCase();
+
+  const level=document.getElementById("levelFilter").value;
+  const type=document.getElementById("typeFilter").value;
+
+  const result=library.filter(item=>{
+
+    const matchesSearch=
+      !q ||
+      item[1].toLowerCase().includes(q) ||
+      item[2].toLowerCase().includes(q) ||
+      item[3].toLowerCase().includes(q);
+
+    const matchesLevel=
+      !level || item[2]===level;
+
+    const matchesType=
+      !type || item[3]===type;
+
+    return matchesSearch && matchesLevel && matchesType;
+  });
+
+  const grid=document.getElementById("libraryGrid");
+
+  if(result.length===0){
+    grid.innerHTML=`
+      <div class="card center" style="grid-column:1/-1">
+        لا توجد نتائج مطابقة.
       </div>`;
     return;
   }
 
-  try{
+  grid.innerHTML=result.map(item=>`
+    <div class="card">
+      <div style="font-size:38px">${item[0]}</div>
+      <h3>${escapeHTML(item[1])}</h3>
+      <p>
+        ${escapeHTML(item[2])} ·
+        ${escapeHTML(item[3])}
+      </p>
+      <button class="btn btn-outline"
+        onclick="openResource('${escapeJS(item[1])}')">
+        فتح
+      </button>
+    </div>
+  `).join("");
 
-    const {data,error}=await supabaseClient
-      .from("profiles")
-      .select("id,full_name,country,xp")
-      .order("xp",{ascending:false})
-      .limit(20);
+  document.getElementById("filesCount").textContent=library.length;
+}
 
-    if(error || !data || !data.length){
-      box.innerHTML=`
-      <div class="leader">
-        <div class="rank">—</div>
-        <div class="avatar">🌍</div>
-        <div class="leaderInfo">
-          <b>لا يوجد ترتيب بعد</b>
-          <small>كن أول لاعب!</small>
-        </div>
-        <div class="xp">0 XP</div>
-      </div>`;
-      return;
+function openResource(name){
+
+  alert(
+    "📚 "+name+
+    "\n\nهذا القسم جاهز لربط ملفات PDF الحقيقية في المرحلة التالية."
+  );
+}
+
+["searchInput","levelFilter","typeFilter"].forEach(id=>{
+  document.getElementById(id).addEventListener("input",renderLibrary);
+});
+
+/* =========================================================
+   UI
+========================================================= */
+
+function updateUI(){
+
+  const logged=!!currentUser;
+
+  document.getElementById("loggedOutAccount")
+    .classList.toggle("hidden",logged);
+
+  document.getElementById("loggedAccount")
+    .classList.toggle("hidden",!logged);
+
+  if(!logged){
+
+    document.getElementById("accountBtn").textContent="👤 دخول";
+    document.getElementById("heroXP").textContent="0";
+
+    return;
+  }
+
+  const name=
+    profile?.full_name ||
+    currentUser.user_metadata?.full_name ||
+    "طالب HAMOU";
+
+  const xp=Number(profile?.xp||0);
+  const level=Number(
+    profile?.level || calculateLevel(xp)
+  );
+
+  document.getElementById("accountBtn").textContent=
+    "👤 "+name;
+
+  document.getElementById("profileName").textContent=name;
+  document.getElementById("profileEmail").textContent=
+    currentUser.email || "";
+
+  document.getElementById("avatar").textContent=
+    name.trim().charAt(0).toUpperCase() || "H";
+
+  document.getElementById("profileXP").textContent=xp;
+  document.getElementById("heroXP").textContent=xp;
+  document.getElementById("profileLevel").textContent=level;
+
+  document.getElementById("statXP").textContent=xp;
+  document.getElementById("statLevel").textContent=level;
+
+  document.getElementById("statGames").textContent=
+    profile?.games_played || 0;
+
+  document.getElementById("statChallenges").textContent=
+    profile?.challenges_completed || 0;
+
+  const currentBase=
+    level<=1 ? 0 :
+    level<=9 ? [0,100,300,600,1000,1500,2200,3000,4000,5500][level-1] :
+    (level-1)*500;
+
+  const nextBase=
+    level<=9 ? [100,300,600,1000,1500,2200,3000,4000,5500,Infinity][level-1] :
+    level*500;
+
+  let percent=0;
+
+  if(nextBase!==Infinity){
+    percent=
+      Math.max(
+        0,
+        Math.min(
+          100,
+          ((xp-currentBase)/(nextBase-currentBase))*100
+        )
+      );
+  }else{
+    percent=100;
+  }
+
+  document.getElementById("levelProgress").style.width=
+    percent+"%";
+
+  document.getElementById("nextLevelText").textContent=
+    nextBase===Infinity
+      ? "🏆 مستوى متقدم جدًا"
+      : "المتبقي للمستوى التالي: "+Math.max(0,nextBase-xp)+" XP";
+}
+
+async function logout(){
+
+  await db.auth.signOut();
+
+  currentUser=null;
+  profile=null;
+
+  updateUI();
+  go("home");
+
+  alert("تم تسجيل الخروج بنجاح.");
+}
+
+/* =========================================================
+   AUTH STATE
+========================================================= */
+
+async function initAuth(){
+
+  const {
+    data:{session}
+  }=await db.auth.getSession();
+
+  if(session?.user){
+
+    currentUser=session.user;
+
+    await loadProfile();
+
+  }else{
+
+    currentUser=null;
+    profile=null;
+    updateUI();
+  }
+
+  db.auth.onAuthStateChange(async(event,session)=>{
+
+    currentUser=session?.user || null;
+
+    if(currentUser){
+      await loadProfile();
+    }else{
+      profile=null;
+      updateUI();
     }
 
-    box.innerHTML=data.map((u,i)=>`
-      <div class="leader">
-        <div class="rank">${i+1}</div>
-        <div class="avatar">${(u.full_name||"S").charAt(0).toUpperCase()}</div>
-        <div class="leaderInfo">
-          <b>${escapeHTML(u.full_name||"Student")}</b><br>
-          <small>${countryFlag(u.country)}</small>
-        </div>
-        <div class="xp">${Number(u.xp||0)} XP</div>
-      </div>
-    `).join("");
-
-  }catch(e){
-    console.warn(e);
-  }
+    loadLeaderboard();
+  });
 }
 
-function countryFlag(c){
-  const f={
-    DZ:"🇩🇿",FR:"🇫🇷",MA:"🇲🇦",TN:"🇹🇳",EG:"🇪🇬",
-    SA:"🇸🇦",AE:"🇦🇪",US:"🇺🇸",GB:"🇬🇧",DE:"🇩🇪",
-    CA:"🇨🇦",TR:"🇹🇷",OTHER:"🌍"
-  };
-  return f[c]||"🌍";
+/* =========================================================
+   HELPERS
+========================================================= */
+
+function showNotice(message,type){
+
+  const el=document.getElementById("authNotice");
+
+  el.textContent=message;
+  el.className="notice "+type;
+  el.style.display="block";
 }
 
-function escapeHTML(str){
-  return String(str)
+function clearNotice(){
+
+  const el=document.getElementById("authNotice");
+
+  el.textContent="";
+  el.style.display="none";
+}
+
+function escapeHTML(value){
+
+  return String(value)
     .replaceAll("&","&amp;")
     .replaceAll("<","&lt;")
     .replaceAll(">","&gt;")
@@ -1380,104 +1418,40 @@ function escapeHTML(str){
     .replaceAll("'","&#039;");
 }
 
-/* =========================================================
-   PREMIUM
-========================================================= */
+function escapeJS(value){
 
-function premiumAlert(){
-  toast("💎 Premium جاهز للربط بنظام الدفع عند إعداد بوابة الدفع.");
+  return String(value)
+    .replaceAll("\\","\\\\")
+    .replaceAll("'","\\'")
+    .replaceAll("\n"," ");
 }
 
-/* =========================================================
-   LANGUAGE
-========================================================= */
+function premiumInfo(){
 
-function toggleLang(){
-  const current=document.documentElement.lang;
-
-  if(current==="ar"){
-    document.documentElement.lang="en";
-    document.documentElement.dir="ltr";
-    $("langText").textContent="EN";
-    toast("🌐 English mode");
-  }else{
-    document.documentElement.lang="ar";
-    document.documentElement.dir="rtl";
-    $("langText").textContent="AR";
-    toast("🌐 الوضع العربي");
-  }
-}
-
-/* =========================================================
-   INIT
-========================================================= */
-
-async function init(){
-
-  renderLibrary();
-  renderGames();
-  updateProfile();
-  updateAccountButton();
-
-  if(supabaseClient){
-
-    try{
-
-      const {data}=await supabaseClient.auth.getSession();
-
-      if(data && data.session){
-
-        currentUser=data.session.user;
-
-        await loadUserProfile();
-        updateAccountButton();
-
-      }
-
-      supabaseClient.auth.onAuthStateChange(async(event,session)=>{
-
-        if(session){
-          currentUser=session.user;
-          await loadUserProfile();
-        }else{
-          currentUser=null;
-        }
-
-        updateAccountButton();
-
-      });
-
-    }catch(e){
-      console.warn(e);
-    }
+  if(!currentUser){
+    openAuth("signup");
+    return;
   }
 
-  loadLeaderboard();
-
-  try{
-    const {count}=await supabaseClient
-      .from("profiles")
-      .select("*",{count:"exact",head:true});
-
-    if(typeof count==="number"){
-      $("students").textContent=count;
-    }
-  }catch(e){}
-
-  try{
-    const {count}=await supabaseClient
-      .from("resources")
-      .select("*",{count:"exact",head:true});
-
-    if(typeof count==="number"){
-      $("files").textContent=count;
-    }
-  }catch(e){}
+  alert(
+    "💎 Premium\n\n"+
+    "نظام الدفع سيتم ربطه لاحقًا ببوابة دفع آمنة.\n"+
+    "لا تدخل بيانات بطاقتك في أي نموذج غير موثوق."
+  );
 }
 
-init();
+/* =========================================================
+   START
+========================================================= */
+
+renderGames();
+renderLibrary();
+loadLeaderboard();
+initAuth();
+
+document.getElementById("studentsCount").textContent="—";
+
 </script>
 
 </body>
 </html>
-```
